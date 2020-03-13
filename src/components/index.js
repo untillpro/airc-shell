@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020-present unTill Pro, Ltd.
+ */
+
 import ApiProvider from './ApiProvider';
 import LoadingStub from './LoadingStub';
 import NotificationsContainer from './NotificationsContainer';

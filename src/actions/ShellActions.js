@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020-present unTill Pro, Ltd.
+ */
+
 import API from 'classes/UshellApi.js';
 import HTTP from 'const/HTTPCodes.js';
 

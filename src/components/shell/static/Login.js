@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020-present unTill Pro, Ltd.
+ */
+
 import React, { Component } from 'react';
 import { bounce } from 'react-animations';
 import styled, { keyframes } from 'styled-components';

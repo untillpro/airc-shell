@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020-present unTill Pro, Ltd.
+ */
+
 class ViewContribution {
     constructor( props ) {
         const { app, code, name, path, methods } = props;

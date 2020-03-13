@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020-present unTill Pro, Ltd.
+ */
+
 import MessageCancel from './MessageCancel';
 import MessageOk from './MessageOk';
 import MessageDo from './MessageDo';

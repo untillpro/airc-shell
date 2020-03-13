@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020-present unTill Pro, Ltd.
+ */
+
 import {
     ADD_SHELL_NOTIFY_MESSAGE
 } from './types';

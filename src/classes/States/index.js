@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020-present unTill Pro, Ltd.
+ */
+
 import StateForgotPassword from './StateForgotPassword';
 import StateLogin from './StateLogin';
 import StateAuth from './StateAuth';

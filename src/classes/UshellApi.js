@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020-present unTill Pro, Ltd.
+ */
+
 import CFG from 'config.js';
 import Axios from 'axios';
 import qs from 'qs';

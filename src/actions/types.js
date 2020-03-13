@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020-present unTill Pro, Ltd.
+ */
+
 /* app types */
 
 export const INIT_APP = 'init_application';

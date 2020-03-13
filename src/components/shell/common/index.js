@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020-present unTill Pro, Ltd.
+ */
+
 import ShellHeader from './ShellHeader';
 import ShellHeaderApplicationsBar from './ShellHeaderApplicationsBar';
 import ShellHeaderViewsBar from './ShellHeaderViewsBar';
