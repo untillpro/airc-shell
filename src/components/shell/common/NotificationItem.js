@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020-present unTill Pro, Ltd.
+ */
+
 import React, { Component } from 'react';
 import * as Notifications from 'const/Notifications.js';
 

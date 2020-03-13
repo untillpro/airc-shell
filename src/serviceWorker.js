@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020-present unTill Pro, Ltd.
+ */
+
 // This optional code is used to register a service worker.
 // register() is not called by default.
 

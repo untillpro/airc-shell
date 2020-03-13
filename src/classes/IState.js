@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020-present unTill Pro, Ltd.
+ */
+
 export default class IState {
     constructor(parent = null, childs = [], result = null) {
         this.parent = parent; 

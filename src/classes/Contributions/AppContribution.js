@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020-present unTill Pro, Ltd.
+ */
+
 class AppContribution {
     constructor(code, name, path, view) {
         this.name = name || null;

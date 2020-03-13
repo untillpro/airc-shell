@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020-present unTill Pro, Ltd.
+ */
+
 import React, { Component, Fragment } from 'react';
 import iframeApi from 'iframe-api';
 import { connect } from 'react-redux';

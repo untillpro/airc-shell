@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020-present unTill Pro, Ltd.
+ */
+
 export default class StateMachine {
     constructor(context = null) {
         this.stack = [];

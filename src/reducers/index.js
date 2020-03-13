@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020-present unTill Pro, Ltd.
+ */
+
 import { combineReducers } from 'redux';
 
 import ShellReducer from './ShellReducer';
