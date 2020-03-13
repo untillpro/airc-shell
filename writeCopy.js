@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020-present unTill Pro, Ltd.
+ */
+
 var path = require('path');
 var fs = require('fs');
 var async = require('async');
@@ -68,9 +72,11 @@ async function checkFiles(files) {
 
     console.log('files withoud copy:');
     console.log(noCopyFiles);
+
+    
 }
 
-getFiles('./src', function (err, files) {
+getFiles('./', function (err, files) {
     //console.log(err || files);
 
     if (files && _.size(files) > 0) {
