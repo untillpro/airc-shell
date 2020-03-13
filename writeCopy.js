@@ -76,7 +76,7 @@ async function checkFiles(files) {
     
 }
 
-getFiles('./', function (err, files) {
+getFiles('./src', function (err, files) {
     //console.log(err || files);
 
     if (files && _.size(files) > 0) {
