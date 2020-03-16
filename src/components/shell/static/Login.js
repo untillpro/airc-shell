@@ -48,12 +48,10 @@ class Login extends Component {
                         <div className="ushell-login-block-logo">
                             <img src={require('assets/img/logo-rounded.svg')} alt="Logo" />
                         </div>
-                        <Bounce>
-                            <div className="ushell-login-block-title">
-                                Welcome back!
-                            </div>
-                        </Bounce>
 
+                        <div className="ushell-login-block-title">
+                            Welcome back!
+                        </div>
 
                         <div className="ushell-login-block-illustration">
                             <img src={require('base/images/Illustrations/log-in.svg')} alt="Illustration" />
