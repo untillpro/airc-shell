@@ -3,8 +3,7 @@
  */
 
 import API from 'classes/UshellApi.js';
-
-import manifest from 'const/manifest';
+import HTTP from 'const/HTTPCodes.js';
 
 import {
     INIT_APP,
@@ -43,13 +42,6 @@ export const initApp = () => {
 };
 
 export const loadManifest = () => {
-    return {
-        type: APPLY_MANIFEST,
-        payload: manifest
-    };
-}
-
-export const _loadManifest = () => {
     return (dispatch, getState) => {
         const state = getState();
         const { token, tokenValid } = state.shell;

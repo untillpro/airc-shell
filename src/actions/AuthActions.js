@@ -19,22 +19,7 @@ import {
     addShellSuccessNotify
 } from './NotifyActions'
 
-const TEST_TOKEN = "test.jwt.token";
-
-//TODO remove this
-// just for airs-router-2 testing
 export const checkAuthToken = (force = false) => {
-    return {
-        type: SET_AUTH_TOKEN,
-        payload: {
-            token: TEST_TOKEN,
-            tokenValid: true,
-            tokenExpired: new Date().valueOf() + 86400000
-        }
-    };
-}
-
-export const _checkAuthToken = (force = false) => {
     return (dispatch, getState) => {
         const state = getState();
         const { token, tokenExpired } = state.shell;
@@ -72,20 +57,7 @@ export const _checkAuthToken = (force = false) => {
     };
 };
 
-//TODO remove this
-// just for airs-router-2 testing
 export const doAuth = (login, password, register = false) => {
-    return { 
-        type: SET_AUTH_TOKEN,
-        payload: {
-            token: TEST_TOKEN, 
-            tokenValid: true,
-            tokenExpired: new Date().valueOf() + 86400000
-        }
-    }
-}
-
-export const _doAuth = (login, password, register = false) => {
     return (dispatch) => {
         let action = null;
 
