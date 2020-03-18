@@ -23,7 +23,7 @@ const TEST_TOKEN = "test.jwt.token";
 
 //TODO remove this
 // just for airs-router-2 testing
-export const checkAuthToken = (force = false) => {
+export const checkAuthToken = (force = false) => { 
     return {
         type: SET_AUTH_TOKEN,
         payload: {
