@@ -6,7 +6,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
-import { NotificationItem } from 'components/shell/common/';
+import { NotificationItem } from 'components/common/';
 
 import cn from 'classnames';
 
@@ -19,7 +19,7 @@ class NotificationsContainer extends Component {
         };
     }
 
-    componentWillReceiveProps(newProps) {
+    componentDidUpdate(newProps) {
         if (newProps.last && (this.props.last !== newProps.last)) {
             const { last, notifications } = newProps;
 

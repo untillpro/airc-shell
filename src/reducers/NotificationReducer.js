@@ -6,7 +6,7 @@ import _ from 'lodash';
 
 import {
     ADD_SHELL_NOTIFY_MESSAGE
-} from 'actions/types';
+} from 'actions/';
 
 
 const INITIAL_STATE = {
@@ -18,7 +18,6 @@ export default (state = INITIAL_STATE, action) => {
     let newId = null;
     let newItem = null;
     let newNotifications = {};
-
 
     switch (action.type) {
         

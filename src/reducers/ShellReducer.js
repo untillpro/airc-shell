@@ -3,27 +3,50 @@
  */
 
 //import _ from 'lodash';
+import initState from 'utils/InitState';
+import * as InitFuncs from './initiators/ShellStateInit';
 
-import * as Types from 'actions/types';
+import {
+    AUTH_USER,
+    INIT_STATE,
+    //INIT_APP,
+    //CHANGE_PATH,
+    IFRAME_LOADING_FINISH,
+    SET_AUTH_TOKEN,
+    DO_LOGOUT,
+    APPLY_MANIFEST,
+    SELECT_SHELL_MODULE,
+    SELECT_SHELL_VIEW,
+    SELECT_PLUGIN
+} from 'actions/';
 
 const INITIAL_STATE = {
     token: null,
-    tokenValid: false, 
+    tokenValid: false,
     tokenExpired: null,
     application: null,
     view: null,
+    
+    login: false,
 
-    login: true,
+    //path: null,
+    manifest: null,
+    visited: false,
 
-    path: null,
-    manifest: null
+    //module rights
+    rights: {}
 };
 
 export default (state = INITIAL_STATE, action) => {
-    let path, app, view, arr, apps;
+    //let path, arr;
+    let app, view, apps;
 
     switch (action.type) {
-        case Types.INIT_APP: 
+        case INIT_STATE:
+            return initState(state, InitFuncs);
+
+            /*
+        case INIT_APP:
             if (window && window.location && window.location.pathname) {
                 path = window.location.pathname;
 
@@ -42,8 +65,9 @@ export default (state = INITIAL_STATE, action) => {
             }
 
             return state;
+       
 
-        case Types.CHANGE_PATH: 
+        case CHANGE_PATH:
             if (action.payload) {
                 return {
                     ...state,
@@ -52,20 +76,29 @@ export default (state = INITIAL_STATE, action) => {
             }
 
             return state;
+        */
 
-        case Types.IFRAME_LOADING_FINISH:
+        case IFRAME_LOADING_FINISH:
             return {
                 ...state,
                 iframeLoaded: true
             };
 
-        case Types.SET_AUTH_TOKEN: 
+        case AUTH_USER:
+            return {
+                token: action.payload.token,
+                tokenValid: true,
+                tokenExpired: action.payload.ttl,
+                authorized: true
+            };
+
+        case SET_AUTH_TOKEN:
             return {
                 ...state,
                 ...action.payload
             };
-        
-        case Types.DO_LOGOUT: 
+
+        case DO_LOGOUT:
             return {
                 ...state,
                 token: null,
@@ -73,7 +106,7 @@ export default (state = INITIAL_STATE, action) => {
                 tokenExpired: null
             };
 
-        case Types.APPLY_MANIFEST: 
+        case APPLY_MANIFEST:
             if (action.payload) {
                 apps = Object.values(action.payload);
 
@@ -91,32 +124,39 @@ export default (state = INITIAL_STATE, action) => {
                     application: app ? app.code : state.application,
                     view: view ? view.code : state.view,
                 };
-    
+
             }
 
             return state;
-        case Types.SELECT_SHELL_MODULE:
+
+        case SELECT_SHELL_MODULE:
             app = action.payload.application;
             view = action.payload.view;
 
-            window.history.pushState('', '', `/${app}/${view || ''}`);
-
+            //window.history.pushState('', '', `/${app}/${view || ''}`); // not required due to use of react-router
 
             return {
                 ...state,
                 ...action.payload,
             };
-            
-        case Types.SELECT_SHELL_VIEW:
+
+        case SELECT_SHELL_VIEW:
             app = state.application;
             view = action.payload.view;
 
-            window.history.pushState('', '', `/${app}/${view || ''}`);
+            //window.history.pushState('', '', `/${app}/${view || ''}`); // not required due to use of react-router
 
             return {
                 ...state,
                 ...action.payload
             };
+
+        case SELECT_PLUGIN:
+            return {
+                ...state,
+                application: action.payload.application,
+                view: action.payload.view
+            }
 
         default:
             return state;

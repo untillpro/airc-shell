@@ -208,89 +208,12 @@ body {
     grid-template-rows: auto 1fr;
 }
 
-.ushell-container.login {
-    display: block;
-    align-self: center;
-    justify-self: center;
-}
-
-.ushell-login-container {
-    margin: 0 auto;
-    width: 320pt;
-}
-
-.ushell-login-block {
-    padding: 24pt;
-    box-shadow: var(--box-shadow-z-2);
-}
-
-.ushell-login-block-logo {
-    width: 32pt;
-    height: 32pt;
-    margin: 0px auto 32pt;
-}
-
-.ushell-login-block-logo img {
+.ushell-container.flex {
     width: 100%;
     height: 100%;
-}
-
-.ushell-login-block-title {
-    text-align: center;
-    font-size: 20pt;
-    margin-bottom: 24pt;
-}
-
-.ushell-login-block-illustration {
-    text-align: center;
-    margin-bottom: 50px;
-}
-
-.ushell-login-block-link {
-    margin-top: 20px;
-    text-align: center;
-    font-size: 10pt;
-}
- 
-.ushell-login-bottom-navigation {
-    margin-top: 30pt;
-    font-size: 10pt;
-}
-
-.ushell-login-bottom-navigation a {
-    color: var(--color-text-light);
-}
-
-.ushell-login-bottom-navigation a:hover {
-    color: var(--color-text-dark);
-}
-
-.ushell-login-bottom-navigation ul {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-
-    width: 100%;
-}
-
-.ushell-login-bottom-navigation ul li {
-    display: inline-flex;
-
+    align-items: center;
     justify-content: center;
-}
-
-
-
-/**********/
-
-.ushell-login-block-form {
-    
-}
-
-.ushell-login-block-form-title {
-    text-align: center;
-    font-size: 15pt;
-    margin-bottom: 20px;
 }
 
 
@@ -457,7 +380,7 @@ body {
     position: relative;
 }
 
-.ushell-header-nav-activity-bar ul li.active:after {
+.ushell-header-nav-activity-bar ul li a.active:after {
     content: ' ';
     width: 100%;
     height: 3pt;
@@ -499,7 +422,7 @@ body {
     position: relative
 }
 
-.ushell-header-views-bar ul li.active:after {
+.ushell-header-views-bar ul li a.active:after {
     content: ' ';
     width: 100%;
     height: 3pt;
@@ -555,6 +478,7 @@ body {
 
 .ushell-working-area {
     position: relative;
+    display: flex;
 }
 
 .ushell-working-area-iframe {
@@ -602,7 +526,7 @@ body {
 .ushell-footer-container {
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
+    align-items: center;
     padding: 10pt 0pt;
 }
 
@@ -621,11 +545,13 @@ body {
     text-align: right;
 }
 
+.ushell-footer-lang-selector {
+    display: inline-block;
+    margin-left: 20px;
+}
+
 /* modal */
 
-.ushell-modal-portal {
-    
-}
 
 .ushell-modal-overlay {
     position: absolute;
