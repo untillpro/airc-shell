@@ -5,6 +5,7 @@
 import isProd from 'is-prod';
 //import ApiGate from 'api/ApiGate';
 import MockApiGate from 'api/MockApiGate';
+import Logger from 'base/classes/Logger';
 
 
 export const initAPI = (state) => {
@@ -14,7 +15,12 @@ export const initAPI = (state) => {
         api = new MockApiGate('https://air-alpha.untill.ru/api');
         //api = new MockApiGate('http://localhost:8001/api');
     } else {
-        api = new MockApiGate('https://air-alpha.untill.ru/api');
+        const url = `${window.location.origin}/api`;
+        Logger.info(`URL: ${url}`, "Init api gate");
+
+        api = new MockApiGate(url);
+        
+        //api = new MockApiGate('https://air-alpha.untill.ru/api');
         //api = new MockApiGate('https://air-test.untill.ru/api');
         //api = new ApiGate('https://hetzner.air.untill.ru/api'); //TODO
     }
