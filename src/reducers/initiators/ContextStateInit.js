@@ -16,7 +16,7 @@ export const initAPI = (state) => {
         //api = new MockApiGate('http://localhost:8001/api');
     } else {
         const url = `${window.location.origin}/api`;
-        Logger.info(`URL: ${url}`, "Init api gate");
+        Logger.log(`URL: ${url}`, "Init api gate", "ContextStateInit.initAPI()");
 
         api = new MockApiGate(url);
         
