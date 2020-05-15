@@ -1,0 +1,43 @@
+{
+    "510000001": {
+        "name": "Journal",
+        "code": "journal",
+        "path": "/plugins/journal/index.html",
+        "order": 0,
+        "id": 510000001
+    },
+    "510000002": {
+        "name": "Back Office",
+        "code": "bo",
+        "initialView": "areas",
+        "methods": [
+            "view_change"
+        ],
+        "views": [
+            {
+                "name": "Products",
+                "code": "products",
+                "type": "module",
+                "data": {},
+                "path": "/plugins/bo/index.html"
+            },
+            {
+                "name": "General",
+                "code": "general",
+                "type": "module",
+                "data": {},
+                "path": "/plugins/bo/index.html"
+            },
+            {
+                "name": "Areas",
+                "code": "areas",
+                "type": "module",
+                "data": {},
+                "path": "/plugins/bo/index.html"
+            }
+        ],
+        "path": "/plugins/bo/index.html",
+        "order": 1,
+        "id": 510000002
+    }
+} 

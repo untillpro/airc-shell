@@ -5,42 +5,67 @@
 import _ from 'lodash';
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-
-//components
-import * as Static from 'components/shell/static';
-
-import Footer from 'components/shell/common/Footer';
-
+import { Auth, Shell} from 'components/containers';
+import Footer from 'components/common/Footer';
+import Logger from 'base/classes/Logger';
 import NotificationsContainer from './NotificationsContainer';
 
-import * as Modals from 'components/shell/modals';
+import * as Modals from 'components/modals';
+
+import initi18n from 'utils/initI18n';
+
+import {
+    SHELL_STATE,
+    LOGIN_STATE
+} from 'const/static_states';
+
+import {
+    MODAL_AUTH,
+    MODAL_FORGOT
+} from 'const/modal_states';
 
 //actions
 
 import {
-    initApp
+    initApp,
+    addShellErrorNotify,
+    sendLaguageInitiated
 } from 'actions';
 
 //assets
 import 'base/css/untill-base.css';
 import 'assets/css/main.css';
 
+//lng
+import * as lng from 'lang';
+
 
 class Root extends Component {
-    componentDidMount() {
-        this.props.initApp(window.location.pathname);
+    componentDidMount() { 
+        initi18n(lng, (err) => {
+            if (err) {  
+                this.props.addShellErrorNotify(err);
+            } else {
+                this.props.sendLaguageInitiated();
+            }
+        });
+        
+        this.props.initApp(window.location.pathname); // TODO как то надо избавиться от этого. возможно через ReactRouter
     }
 
     renderStaticStateComponent() {
+        // тут надо все переделать. ввести номальную state-machine
         const { staticStack } = this.props;
         const cstate = _.last(staticStack);
 
-        switch ( cstate ) {
-            case 'login': 
-                return <Static.Login />;
+        Logger.log(cstate, 'Current static state', 'components/Root');
 
+        switch ( cstate ) {
+            case LOGIN_STATE: 
+                return <Auth />;
+            case SHELL_STATE:
             default: 
-                return <Static.Shell />;
+                return <Shell />;
         }
     }
 
@@ -49,9 +74,9 @@ class Root extends Component {
         const cstate = _.last(modalStack);
 
         switch ( cstate ) {
-            case 'forgot': 
+            case MODAL_FORGOT: 
                 return <Modals.ForgotPassword />;
-            case 'auth': 
+            case MODAL_AUTH: 
                 return <Modals.Auth />;
             default: 
                 return null;
@@ -59,9 +84,11 @@ class Root extends Component {
     }
 
     render() {
+        const { currentLanguage } = this.props;
+        
         return (
             <Fragment>
-                <div className="--wrapper">
+                <div className="--wrapper" key={`root_${currentLanguage}`}>
                     <NotificationsContainer left top />
 
                     {this.renderStaticStateComponent()}
@@ -76,12 +103,17 @@ class Root extends Component {
 }
 
 const mapStateToProps = (state) => {
-    const { modalStack, staticStack } = state.ui;
+    const { modalStack, staticStack, currentLanguage } = state.ui;
 
     return {
         modalStack, 
-        staticStack
+        staticStack,
+        currentLanguage
     };
 };
 
-export default connect(mapStateToProps, { initApp })(Root);
+export default connect(mapStateToProps, { 
+    initApp, 
+    addShellErrorNotify,
+    sendLaguageInitiated 
+})(Root);

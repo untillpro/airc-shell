@@ -4,7 +4,9 @@
 
 import _ from 'lodash';
 import * as Contributions from 'classes/Contributions';
-import * as Types from 'actions/types';
+import {
+    APPLY_MANIFEST
+} from 'actions/';
 
 const INITIAL_STATE = {
     APPS: {},
@@ -16,7 +18,7 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
     
     switch (action.type) {
-        case Types.APPLY_MANIFEST: 
+        case APPLY_MANIFEST: 
             const manifest = action.payload;
 
             const apps = {};

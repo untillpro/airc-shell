@@ -1,0 +1,97 @@
+{
+    "translation": {
+        "auth": {
+            "login": {
+                "hello_1": "Hi!",
+                "hello_2": "Welcome back",
+                "email": "E-mail",
+                "password": "Password",
+                "remember_me": "Remember me",
+                "forgot_password": "Forgot password",
+                "or": "Or",
+                "register_now": "register now!",
+                "homepage": "Homepage",
+                "knowledge_base": "Knowledge base",
+                "app_store": "App store",
+                "google_play": "Google play",
+                "log_in": "Log in",
+                "errors": {
+                    "auth_presponse_malformder": "Auth response malformed",
+                    "empty_email": "Please input your e-mail!",
+                    "empty_password": "Please input your Password!"
+                }
+            },
+            "register": {
+                "step_1": "Personal info",
+                "step_2": "Confirmation",
+                "step_3": "Done",
+                "email": "E-mail",
+                "password": "Password",
+                "confirm_password": "Confirm password",
+                "country": "Select a country",
+                "phone_number": "Phone number",
+                "i_have_read": "I have read the",
+                "licence_agreement": "licence agreement",
+                "confirm_text_1": "We just sent an e-mail on \"{{email}}\".",
+                "confirm_text_2": "Please enter code from e-mail in the fields below",
+                "resend_code": "Resend code",
+                "terms_of_use": "Terms of use",
+                "step_1_submit": "Next",
+                "step_3_submit": "Let's start",
+                "success_title": "Successful registration!",
+                "success_text": "You can start managing you account.",
+                "errors": {
+                    "not_equal_passwords": "Two passwords that you enter is not equal!",
+                    "empty_email": "Please input your E-mail!",
+                    "password_len_requirements": "Password must be min 6 and max 20 characters",
+                    "password_special_requirements": "Password should contain: A-Z, a-z, 0-9, special chars.",
+                    "empty_password": "Please input your password!",
+                    "empty_confirm_password": "Please confirm your password!",
+                    "empty_country": "Please select your country!",
+                    "empty_phone": "Please input your phone number!",
+                    "expired_token": "Your token has expired. Please resend confirm code",
+                    "": ""
+                }
+            },
+            "forgot": {
+                "step_1": "E-mail",
+                "step_2": "Set password",
+                "step_3": "Done",
+                "enter_your_email_below": "Enter your e-mail in the field below and press \"Next\" button.",
+                "enter_email": "Enter e-mail",
+                "password_label": "Password",
+                "confirm_label": "Confirm Password",
+                "success_title": "Password changed!",
+                "success_text": "You can sign in with your new password",
+                "step_1_submit": "Next",
+                "step_2_submit": "Reset password",
+                "step_3_submit": "Sign in",
+                "errors": {
+                    "invalid_email": "The input is not valid E-mail!",
+                    "empty_email": "Please input your e-mail!",
+                    "inconsistent_passwords": "Two passwords that you enter is inconsistent!",
+                    "empty_token": "Please enter token!",
+                    "password_len_requirements": "Password must be min 6 and max 20 characters",
+                    "password_special_requirements": "Password should contain: A-Z, a-z, 0-9, special chars.",
+                    "empty_password": "Please input your password!",
+                    "empty_confirm": "Please confirm your password!"
+                }
+            }
+        },
+        "shell": {
+            "logout_title": "Do you realy want to quit?",
+            "logout_text": "When clicked the OK button, this dialog will be closed after 1 second",
+            "user_menu": {
+                "general_settings": "General settings",
+                "criteria_sets": "Criteria sets",
+                "password_change": "Password change",
+                "sign_out": "Sign out"
+            },
+            "footer": {
+                "copy": "© {{year}} Untill. All rights reserved.",
+                "managment": "unTill Air Web Managment",
+                "version": "v.{{version}}"
+            }
+        }
+    }
+}

@@ -3,26 +3,62 @@
  */
 
 import _ from 'lodash';
+import initState from 'utils/InitState';
 
-import * as Types from 'actions/types';
+import * as InitFuncs from './initiators/UIStateInit';
+
+import { 
+    setCurrentLanguage,
+    setShellLanguages
+} from './helpers/UIHelpers';
+
+import {
+    INIT_STATE,
+    INIT_APP,
+    SHOW_AUTH_MODAL,
+    HIDE_AUTH_MODAL,
+    SHOW_FORGOT_MODAL,
+    HIDE_FORGOT_MODAL,
+    SET_AUTH_TOKEN,
+    DO_LOGOUT,
+    SET_LANGUAGE,
+    LAGUAGES_INITIATED
+} from 'actions';
+
+import {
+    SHELL_STATE,
+    LOGIN_STATE
+} from 'const/static_states';
+
+import {
+    MODAL_AUTH,
+    MODAL_FORGOT
+} from 'const/modal_states';
 
 const INITIAL_STATE = {
     iframeLoaded: true,
-    cstate: null,
     modalStack: [],
     staticStack: [],
     loading: true,
+    defaultLanguage: 'en',
+    currentLanguage: null,
+    availableLangs: null
 };
+
+// TODO Create Stack object
 
 export default (state = INITIAL_STATE, action) => {
     let stack;
 
     switch (action.type) {
-        case Types.INIT_APP: 
-            stack = addStateToStack('shell', state.staticStack);
-            
+        case INIT_STATE:
+            return initState(state, InitFuncs);
+
+        case INIT_APP:
+            stack = addStateToStack(SHELL_STATE, state.staticStack);
+
             if (action.payload.login) {
-                stack = addStateToStack('login', stack);
+                stack = addStateToStack(LOGIN_STATE, stack);
             }
 
             return {
@@ -32,48 +68,54 @@ export default (state = INITIAL_STATE, action) => {
                 loading: false
             };
 
-            case Types.SHOW_AUTH_MODAL: 
-            stack = addStateToStack('auth', state.modalStack);
+        case LAGUAGES_INITIATED: 
+            return setShellLanguages(state);
+
+        case SET_LANGUAGE: 
+            return setCurrentLanguage(state, action.payload);
+
+        case SHOW_AUTH_MODAL:
+            stack = addStateToStack(MODAL_AUTH, state.modalStack);
 
             return {
                 ...state,
                 modalStack: stack
             };
 
-        case Types.HIDE_AUTH_MODAL: 
-            stack = removeStateFromStack('auth', state.modalStack);
+        case HIDE_AUTH_MODAL:
+            stack = removeStateFromStack(MODAL_AUTH, state.modalStack);
 
             return {
                 ...state,
                 modalStack: stack
             };
 
-        case Types.SHOW_FORGOT_MODAL: 
-            stack = addStateToStack('forgot', state.modalStack);
+        case SHOW_FORGOT_MODAL:
+            stack = addStateToStack(MODAL_FORGOT, state.modalStack);
 
             return {
                 ...state,
                 modalStack: stack
             };
 
-        case Types.HIDE_FORGOT_MODAL: 
-            stack = removeStateFromStack('forgot', state.modalStack);    
+        case HIDE_FORGOT_MODAL:
+            stack = removeStateFromStack(MODAL_FORGOT, state.modalStack);
 
             return {
                 ...state,
                 modalStack: stack
             };
 
-        case Types.SET_AUTH_TOKEN: 
+        case SET_AUTH_TOKEN:
             return {
                 ...state,
-                staticStack: removeStateFromStack('login', state.staticStack || []),
-                modalStack: removeStateFromStack('auth', state.modalStack || [])
+                staticStack: removeStateFromStack(LOGIN_STATE, state.staticStack || []),
+                modalStack: removeStateFromStack(MODAL_AUTH, state.modalStack || [])
             };
 
-        case Types.DO_LOGOUT: 
+        case DO_LOGOUT:
             stack = state.staticStack || [];
-            stack = addStateToStack('login', stack);
+            stack = addStateToStack(LOGIN_STATE, stack);
 
             return {
                 ...state,
@@ -83,7 +125,7 @@ export default (state = INITIAL_STATE, action) => {
                 tokenExpired: null
             };
 
-        default: 
+        default:
             return state;
     }
 };
@@ -109,7 +151,7 @@ const removeStateFromStack = (state, stack) => {
 
     if (stack && stack.length > 0) newStack = [...stack];
 
-    if (!state || typeof state !== 'string') return null;
+    if (!state || typeof state !== 'string') return stack;
 
     if (!newStack) newStack = [];
 

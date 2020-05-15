@@ -2,7 +2,7 @@
  * Copyright (c) 2020-present unTill Pro, Ltd.
  */
 
-import log from 'Log';
+import Logger from 'base/classes/Logger';
 
 class ViewModuleContribution {
     constructor( props ) {
@@ -25,11 +25,11 @@ class ViewModuleContribution {
     }
 
     invoke() {
-        log(`Try load in ViewModuleContribution ${this.name}`);
-        log(global.API);
+        Logger.debug(global.API, `Try load in ViewModuleContribution ${this.name}`, 'ViewModuleContribution');
 
         if (global.API && global.API.dispatch) {
-            log('dispathcing');
+            Logger.debug('dispathcing');
+
             global.API.dispatch({
                 type: 'view_change',
                 payload: this.code
