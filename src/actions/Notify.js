@@ -7,7 +7,7 @@ import {
     INFO,
     WARNING,
     SUCCESS
-} from 'const/notifies';
+} from 'const/notifications';
 
 export const ADD_SHELL_NOTIFY_MESSAGE = 'add_shell_notify_message';
 

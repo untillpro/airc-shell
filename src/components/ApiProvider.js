@@ -11,7 +11,7 @@ import {
     INFO,
     WARNING,
     SUCCESS
-} from 'const/notifies';
+} from 'const/notifications';
 
 import {
     addShellNotifyMessage,
