@@ -20,8 +20,10 @@ class NotificationsContainer extends Component {
     }
 
     componentDidUpdate(newProps) {
+        const { notifications } = this.props;
+        
         if (newProps.last && (this.props.last !== newProps.last)) {
-            const { last, notifications } = newProps;
+            const { last,  } = newProps;
 
             const mess = notifications[last];
 

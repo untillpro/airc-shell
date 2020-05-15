@@ -3,7 +3,7 @@
  */
 
 import React, { Component } from 'react';
-import * as Notifications from 'const/notifications.js';
+import * as Notifications from 'const/notifies.js';
 
 import cn from 'classnames';
 
