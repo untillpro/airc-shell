@@ -55,8 +55,8 @@
         ],
         "views": [
             {
-                "name": "Order screen tabs",
-                "code": "func_panel_tabs",
+                "name": "Order screen",
+                "code": "order_screen",
                 "type": "module",
                 "data": {},
                 "path": "/plugins/app/index.html"
