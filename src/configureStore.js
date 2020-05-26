@@ -17,7 +17,7 @@ import {
 
 
 const persistConfig = {
-  key: 'root',
+  key: 'shell',
   storage,
   blacklist: ['cp', 'ui', 'context', 'auth']
 };

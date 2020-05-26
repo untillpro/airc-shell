@@ -235,7 +235,7 @@ class ApiGate {
             params['To'] = parseInt(to);
         }
 
-        if (type && typeof type === 'string') {
+        if (type !== null && type !== undefined && typeof type === 'string') {
             params['Type'] = type;
         }
 

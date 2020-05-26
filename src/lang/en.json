@@ -14,7 +14,7 @@
                 "knowledge_base": "Knowledge base",
                 "app_store": "App store",
                 "google_play": "Google play",
-                "log_in": "Log in",
+                "log_in": "Sign in",
                 "errors": {
                     "auth_presponse_malformder": "Auth response malformed",
                     "empty_email": "Please input your e-mail!",

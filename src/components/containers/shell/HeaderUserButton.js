@@ -37,12 +37,16 @@ class HeaderUserButton extends Component {
                     </Link>
                 </Menu.Item>
 
+                
+                
+                {/*
                 <Menu.Divider />
-
+                
                 <Menu.Item>
                     {i18next.t('shell.user_menu.criteria_sets')}
                 </Menu.Item>
-
+                */}
+                
                 <Menu.Divider />
 
                 <Menu.Item

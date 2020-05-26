@@ -9,7 +9,7 @@
     "510000002": {
         "name": "Back Office",
         "code": "bo",
-        "initialView": "areas",
+        "initialView": "products",
         "methods": [
             "view_change"
         ],
@@ -34,10 +34,36 @@
                 "type": "module",
                 "data": {},
                 "path": "/plugins/bo/index.html"
+            },
+            {
+                "name": "Users",
+                "code": "users",
+                "type": "module",
+                "data": {},
+                "path": "/plugins/bo/index.html"
             }
         ],
         "path": "/plugins/bo/index.html",
         "order": 1,
         "id": 510000002
+    },
+    "510000003": {
+        "name": "Application",
+        "code": "app",
+        "methods": [
+            "view_change"
+        ],
+        "views": [
+            {
+                "name": "Order screen",
+                "code": "order_screen",
+                "type": "module",
+                "data": {},
+                "path": "/plugins/app/index.html"
+            }
+        ],
+        "path": "/plugins/app/index.html",
+        "order": 0,
+        "id": 510000003
     }
-} 
+}
