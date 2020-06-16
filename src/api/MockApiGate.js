@@ -351,7 +351,7 @@ class MockApiGate {
         const params = {};
         let location = null;
 
-        if (type != null && type !== undefined && typeof type === 'string') {
+        if (type !== null && type !== undefined && typeof type === 'string') {
             params['Type'] = type;
         } else {
             throw new Error('api.collection() call error: wrong "Type" prop: expected a string, received ' + type);
