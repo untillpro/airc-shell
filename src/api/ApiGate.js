@@ -153,7 +153,7 @@ class ApiGate {
 
     async collection(token, type, wsids, entries, page, page_size, show_deleted) {
         console.log('collection method call:', token, type, wsids, entries, page, page_size, show_deleted);
-        
+
         /*
         const { 
             entries, 
@@ -256,7 +256,7 @@ class ApiGate {
             params['To'] = parseInt(to);
         }
 
-        if (type !== null && type !== undefined && typeof type === 'string') {
+        if (type !== null && type !== undefined && typeof type === 'string') {   
             params['Type'] = type;
         }
 
