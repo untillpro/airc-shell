@@ -335,12 +335,23 @@ class MockApiGate {
     }
 
     async collection(token, type, wsids, entries, page, page_size, show_deleted) {
+        console.log('collection method call:', token, type, wsids, entries, page, page_size, show_deleted);
+
+        /*
+        const { 
+            entries, 
+            page, 
+            page_size, 
+            show_deleted, 
+            required_fields, 
+            required_classificators 
+        } = props;
+        */
+
         const params = {};
         let location = null;
 
-        console.log('collection method call:', token, type, wsids, entries, page, page_size, show_deleted);
-
-        if (type && typeof type === 'string') {
+        if (type !== null && type !== undefined && typeof type === 'string') {
             params['Type'] = type;
         } else {
             throw new Error('api.collection() call error: wrong "Type" prop: expected a string, received ' + type);
@@ -365,7 +376,17 @@ class MockApiGate {
             params['PageSize'] = null;
         }
 
-        if (entries && _.isArray(entries)) {
+        /*
+        if (required_fields && _.isArray(required_fields) && required_fields.length > 0) {
+            params['Fields'] = required_fields;
+        }
+
+        if (required_classificators && _.isArray(required_classificators) && required_classificators.length > 0) {
+            params['RequiredClassifiers'] = required_classificators;
+        }
+        */
+
+        if (entries && _.isArray(entries) && entries.length > 0) {
             params['Entries'] = entries;
         } else {
             params['Entries'] = null;
@@ -419,7 +440,7 @@ class MockApiGate {
             params['To'] = parseInt(to);
         }
 
-        if (type && typeof type === 'string') {
+        if (type !== null && type !== undefined && typeof type === 'string') {
             params['Type'] = type;
         }
 

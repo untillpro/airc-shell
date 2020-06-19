@@ -152,11 +152,22 @@ class ApiGate {
     }
 
     async collection(token, type, wsids, entries, page, page_size, show_deleted) {
-        const params = {};
-        let location = null;
-
         console.log('collection method call:', token, type, wsids, entries, page, page_size, show_deleted);
 
+        /*
+        const { 
+            entries, 
+            page, 
+            page_size, 
+            show_deleted, 
+            required_fields, 
+            required_classificators 
+        } = props;
+        */
+
+        const params = {};
+        let location = null;
+        
         if (type && typeof type === 'string') {
             params['Type'] = type;
         } else {
@@ -193,6 +204,16 @@ class ApiGate {
         } else {
             params['ShowDeleted'] = 0;
         }
+
+        /*
+        if (required_fields && _.isArray(required_fields) && required_fields.length > 0) {
+            params['Fields'] = required_fields;
+        }
+
+        if (required_classificators && _.isArray(required_classificators) && required_classificators.length > 0) {
+            params['RequiredClassifiers'] = required_classificators;
+        }
+        */
 
         return this.invoke('airs-bp', location, 'collection', token, params)
             .then((res) => this._buildData(res));
@@ -235,7 +256,7 @@ class ApiGate {
             params['To'] = parseInt(to);
         }
 
-        if (type !== null && type !== undefined && typeof type === 'string') {
+        if (type !== null && type !== undefined && typeof type === 'string') {   
             params['Type'] = type;
         }
 
