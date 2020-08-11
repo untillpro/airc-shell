@@ -249,11 +249,11 @@ class ApiGate {
         }
 
         if (_.isNumber(from) && from >= 0) {
-            params['From'] = parseInt(from);
+            params['FromDateTime'] = parseInt(from);
         }
 
         if (_.isNumber(to) && to > 0) {
-            params['To'] = parseInt(to);
+            params['ToDateTime'] = parseInt(to);
         }
 
         if (type !== null && type !== undefined && typeof type === 'string') {   
