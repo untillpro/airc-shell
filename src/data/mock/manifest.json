@@ -1,8 +1,20 @@
 {
     "510000001": {
-        "name": "Journal",
-        "code": "journal",
-        "path": "/plugins/journal/index.html",
+        "name": "Reports",
+        "code": "reports",
+        "methods": [
+            "view_change"
+        ],
+        "views": [
+            {
+                "name": "Basic",
+                "code": "basic_reports",
+                "type": "module",
+                "data": {},
+                "path": "/plugins/reports/index.html"
+            }
+        ],
+        "path": "/plugins/reports/index.html",
         "order": 1,
         "id": 510000001
     },
@@ -67,21 +79,9 @@
         "id": 510000003
     },
     "510000004": {
-        "name": "Reports",
-        "code": "reports",
-        "methods": [
-            "view_change"
-        ],
-        "views": [
-            {
-                "name": "Basic",
-                "code": "basic_reports",
-                "type": "module",
-                "data": {},
-                "path": "/plugins/reports/index.html"
-            }
-        ],
-        "path": "/plugins/reports/index.html",
+        "name": "Journal",
+        "code": "journal",
+        "path": "/plugins/journal/index.html",
         "order": 4,
         "id": 510000004
     }
