@@ -4,12 +4,12 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button, Checkbox } from 'antd';
 import { Link } from 'react-router-dom';
 import { withRouter } from "react-router";
 import { withCookies } from 'react-cookie';
 import i18next from 'i18next';
-
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { userShouldConfirm, authUser } from 'actions';
 import { checkResponse } from 'utils/AuthHelpers';
 import { addShellErrorNotify } from 'actions';
@@ -25,7 +25,7 @@ class Login extends Component {
         };
     }
 
-    handleSubmit = e => {
+    handleSubmit(e) {
         const { api } = this.props;
         
         e.preventDefault();
@@ -128,7 +128,7 @@ class Login extends Component {
                             <img src={require('base/images/Illustrations/log-in.svg')} alt="Illustration" />
                         </div>
 
-                        <Form onSubmit={this.handleSubmit} className="login-form form-block">
+                        <Form onSubmit={this.handleSubmit.bind(this)} className="login-form form-block">
                             <Form.Item>
                                 {getFieldDecorator('email', {
                                     rules: [
@@ -139,7 +139,7 @@ class Login extends Component {
                                     ],
                                 })(
                                     <Input
-                                        prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                        prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }}/>}
                                         placeholder={i18next.t("auth.login.email")}
                                     />,
                                 )}
@@ -154,7 +154,7 @@ class Login extends Component {
                                     ],
                                 })(
                                     <Input
-                                        prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                        prefix={<LockOutlined style={{ color: 'rgba(0,0,0,.25)' }}/>}
                                         type="password"
                                         placeholder={i18next.t("auth.login.password")}
                                     />,

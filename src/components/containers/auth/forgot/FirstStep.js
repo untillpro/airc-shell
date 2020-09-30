@@ -8,9 +8,9 @@ import {
     Typography,
     Form,
     Input,
-    Button,
-    Icon
+    Button
 } from 'antd';
+import { MailOutlined } from '@ant-design/icons';
 import i18next from 'i18next';
 import { checkResponse } from 'utils/AuthHelpers';
 import { forgotChangePassword, userShouldConfirm } from 'actions/';
@@ -27,7 +27,7 @@ class FirstStep extends Component {
         };
     }
 
-    handleSubmit = e => {
+    handleSubmit(e) {
         const { api } = this.props;
 
         e.preventDefault();
@@ -90,7 +90,7 @@ class FirstStep extends Component {
         const { getFieldDecorator } = this.props.form;
 
         return (
-            <Form onSubmit={this.handleSubmit}>
+            <Form onSubmit={this.handleSubmit.bind(this)}>
                 <div className='registration-text-block'>
                     <Text>{i18next.t('auth.forgot.enter_your_email_below')}</Text>
                 </div>
@@ -109,7 +109,7 @@ class FirstStep extends Component {
                         ],
                     })(
                         <Input
-                            prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                            prefix={<MailOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                             placeholder={i18next.t('auth.forgot.enter_email')}
                             size="large"
                         />,
