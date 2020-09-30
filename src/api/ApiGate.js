@@ -151,10 +151,7 @@ class ApiGate {
         return this.invoke('airs-bp', location, 'conf', token, params);
     }
 
-    async collection(token, type, wsids, entries, page, page_size, show_deleted) {
-        console.log('collection method call:', token, type, wsids, entries, page, page_size, show_deleted);
-
-        /*
+    async collection(token, type, wsids, props) {
         const { 
             entries, 
             page, 
@@ -163,8 +160,10 @@ class ApiGate {
             required_fields, 
             required_classificators 
         } = props;
-        */
 
+        console.log('collection method call:', token, type, wsids, entries, page, page_size, show_deleted);
+
+        
         const params = {};
         let location = null;
         
@@ -205,7 +204,6 @@ class ApiGate {
             params['ShowDeleted'] = 0;
         }
 
-        /*
         if (required_fields && _.isArray(required_fields) && required_fields.length > 0) {
             params['Fields'] = required_fields;
         }
@@ -213,7 +211,6 @@ class ApiGate {
         if (required_classificators && _.isArray(required_classificators) && required_classificators.length > 0) {
             params['RequiredClassifiers'] = required_classificators;
         }
-        */
 
         return this.invoke('airs-bp', location, 'collection', token, params)
             .then((res) => this._buildData(res));

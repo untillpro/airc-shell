@@ -334,10 +334,9 @@ class MockApiGate {
         return this.invoke('airs-bp', location, 'conf', token, params);
     }
 
-    async collection(token, type, wsids, entries, page, page_size, show_deleted) {
+    async collection(token, type, wsids, props) {
         console.log('collection method call:', token, type, wsids, entries, page, page_size, show_deleted);
-
-        /*
+        
         const { 
             entries, 
             page, 
@@ -346,7 +345,6 @@ class MockApiGate {
             required_fields, 
             required_classificators 
         } = props;
-        */
 
         const params = {};
         let location = null;
@@ -376,7 +374,6 @@ class MockApiGate {
             params['PageSize'] = null;
         }
 
-        /*
         if (required_fields && _.isArray(required_fields) && required_fields.length > 0) {
             params['Fields'] = required_fields;
         }
@@ -384,7 +381,6 @@ class MockApiGate {
         if (required_classificators && _.isArray(required_classificators) && required_classificators.length > 0) {
             params['RequiredClassifiers'] = required_classificators;
         }
-        */
 
         if (entries && _.isArray(entries) && entries.length > 0) {
             params['Entries'] = entries;
