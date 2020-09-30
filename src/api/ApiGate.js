@@ -151,7 +151,7 @@ class ApiGate {
         return this.invoke('airs-bp', location, 'conf', token, params);
     }
 
-    async collection(token, type, wsids, props) {
+    async collection(token, type, wsids, props = {}) {
         const { 
             entries, 
             page, 

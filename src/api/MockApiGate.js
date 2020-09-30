@@ -334,7 +334,7 @@ class MockApiGate {
         return this.invoke('airs-bp', location, 'conf', token, params);
     }
 
-    async collection(token, type, wsids, props) {
+    async collection(token, type, wsids, props = {}) {
         console.log('collection method call:', token, type, wsids, entries, page, page_size, show_deleted);
         
         const { 
