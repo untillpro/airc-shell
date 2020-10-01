@@ -10,7 +10,7 @@ const cfg = {
 
 if (isProd.isDevelopment()) {
     //cfg.API_HOST = "http://localhost:8000/api";
-    cfg.API_HOST = "http://kvvw10:8822/api";
+    cfg.API_HOST = "https://air-alpha.untill.ru";
     //cfg.API_HOST = "https://airtest.untill.ru/airs-router";
 } else {
     cfg.API_HOST = "/api";
