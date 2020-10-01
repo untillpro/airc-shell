@@ -31,8 +31,8 @@ class Header extends Component {
                     <div className="ushell-header-nav">
                         <div className="ushell-header-action-pane">
                             {/*
-                            <HeaderTaskButton />
-                            <HeaderNotifyButton />
+                                <HeaderTaskButton />
+                                <HeaderNotifyButton />
                             */}
                             <HeaderUserButton />
                         </div>

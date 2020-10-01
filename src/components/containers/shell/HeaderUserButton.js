@@ -3,6 +3,7 @@
  */
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Button, Dropdown, Menu, Modal } from 'base/components';
 import { Avatar } from 'antd';
@@ -75,6 +76,10 @@ class HeaderUserButton extends Component {
             </Dropdown>
         );
     }
+}
+
+HeaderUserButton.propTypes = {
+    doLogout: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state) => {

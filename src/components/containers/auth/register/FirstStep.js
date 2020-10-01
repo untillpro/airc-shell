@@ -3,6 +3,7 @@
  */
 
 import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import i18next from 'i18next';
@@ -32,16 +33,17 @@ const INIT_VALUES = {
     "password": "123asdASD#@$",
     "confirm": "123asdASD#@$",
     "country": "RUS",
+    "prefix": "+1",
     "phone": "9217747495",
     "agree": true
 };
 
-class RegistrationForm extends Component {
+class FirstRegistrationStep extends Component {
     constructor() {
         super();
 
         this.emailTimer = null;
-
+        this.formRef = null;
         this.state = {
             err: null,
             showAgreement: false,
@@ -50,125 +52,142 @@ class RegistrationForm extends Component {
             autoCompleteResult: [],
             loading: false
         };
+
+        this.handleConfirmBlur = this.handleConfirmBlur.bind(this);
+        this.agrementHandleOk = this.agrementHandleOk.bind(this);
+        this.onAgreementPress = this.onAgreementPress.bind(this);
+        this.agrementHandleCancel = this.agrementHandleCancel.bind(this);
+        this.handleAgreeChange = this.handleAgreeChange.bind(this);
+        this.handleFinish = this.handleFinish.bind(this);
+        this.compareToFirstPassword = this.compareToFirstPassword.bind(this);
+        this.validateToNextPassword = this.validateToNextPassword.bind(this);
+        this.validateEmail = this.validateEmail.bind(this);
     }
 
-    _onAgreementPress() {
+    onAgreementPress() {
         this.setState({
             showAgreement: true
         });
     }
 
-    _agrementHandleOk() {
+    agrementHandleOk() {
         this.setState({
             showAgreement: false,
             isAgree: true,
         });
 
+        if (this.formRef !== null) {
+            this.formRef.current.setFieldsValue({
+                agree: true
+            });
+        }
+        /*
         this.props.form.setFields({
             agree: {
                 value: true,
                 errors: [],
             },
         });
+        */
     }
 
-    _agrementHandleCancel() {
+    agrementHandleCancel() {
         this.setState({
             showAgreement: false,
             isAgree: false,
         });
 
+        if (this.formRef !== null) {
+            this.formRef.current.setFieldsValue({
+                agree: false
+            });
+        }
+        /*
         this.props.form.setFields({
             agree: {
                 value: false,
                 errors: [],
             },
         });
+        */
     }
 
-    _handleAgreeChange(event) {
+    handleAgreeChange(event) {
         this.setState({
             isAgree: event.target.checked
         })
     }
 
-    _renderCountries() {
-        if (Countries != null && Countries.length > 0) {
-            return _.map(Countries, (val, id) => {
-                return <Option value={val.iso3} key={id}>{val.name}</Option>
+    handleFinish(values, err) {
+        const { api } = this.props;
+
+        if (!err) {
+            this.setState({
+                loading: true,
+                err: null
+            });
+
+
+            api.register(values)
+                .then((res) => {
+                    const r = checkResponse(res);
+
+                    if (r === true) {
+                        if (res.needConfirm === true) {
+                            this.props.registerConfirmCode(
+                                res.email,
+                                res.token,
+                                res.tokenttl
+                            );
+                        } else {
+                            this.props.registrationDone();
+                        }
+                    } else {
+                        this.setState({ err: r, loading: false });
+                    }
+                })
+                .catch((e) => {
+                    this.setState({ err: e.message, loading: false });
+                });
+        } else {
+            this.setState({
+                err: null,
+                loading: false
             });
         }
 
-        return <Empty />;
-    }
-
-    handleSubmit = e => {
-        const { api } = this.props;
-
-        e.preventDefault();
-
-        this.setState({
-            loading: true,
-            err: null
-        });
-
-        this.props.form.validateFieldsAndScroll((err, values) => {
-            if (!err) {
-                api.register(values)
-                    .then((res) => {
-                        const r = checkResponse(res);
-
-                        if (r === true) {
-                            if (res.needConfirm === true) {
-                                this.props.registerConfirmCode(
-                                    res.email,
-                                    res.token,
-                                    res.tokenttl
-                                );
-                            } else {
-                                this.props.registrationDone();
-                            }
-                        } else {
-                            this.setState({ err: r, loading: false });
-                        }
-                    })
-                    .catch((e) => {
-                        this.setState({ err: e.message, loading: false });
-                    });
-            } else {
-                this.setState({
-                    err: null,
-                    loading: false
-                });
-            }
-        });
     };
 
-    handleConfirmBlur = e => {
+    handleConfirmBlur(e) {
         const { value } = e.target;
         this.setState({ confirmDirty: this.state.confirmDirty || !!value });
     };
 
-    compareToFirstPassword = (rule, value, callback) => {
-        const { form } = this.props;
-        if (value && value !== form.getFieldValue('password')) {
-            callback(i18next.t('auth.register.errors.not_equal_passwords'));
-        } else {
-            callback();
+    //compareToFirstPassword(rule, value, callback) {
+    async compareToFirstPassword(rule, value, ref) {
+        console.log("compareToFirstPassword", ref);
+
+        if (value && value !== ref.getFieldValue('password')) {
+            return Promise.reject(i18next.t('auth.register.errors.not_equal_passwords'));
         }
+
+        return Promise.resolve();
     };
 
-    validateToNextPassword = (rule, value, callback) => {
-        const { form } = this.props;
-
+    async validateToNextPassword(rule, value, ref) {
+        console.log("Ref: ", ref);
         if (value && this.state.confirmDirty) {
-            form.validateFields(['confirm'], { force: true });
+            ref.validateFields(['confirm'], { force: true });
         }
 
-        callback();
+        return Promise.resolve();
     };
 
-    validateEmail = (rule, value, callback) => {
+
+    //TODO before production!
+    async validateEmail(rule, value) {
+
+        console.log('validateEmail', rule);
         const { api } = this.props;
 
         if (this.emailTimer) {
@@ -179,24 +198,21 @@ class RegistrationForm extends Component {
             this.emailTimer = setTimeout(() => {
                 api.isAvailable({ email: value })
                     .then((res) => {
+                        console.log('api.isAvailable res: ', res);
                         const r = checkResponse(res);
 
-                        if (r === true) {
-                            callback();
-                        } else {
-                            callback(r);
+                        if (r !== true) {
+                            return 'Email not available';
                         }
                     })
                     .catch((e) => {
-                        callback(e.message);
+                        return e.toString();
                     });
             }, 1000);
-        } else {
-            callback();
         }
     }
 
-    _renderError() {
+    renderError() {
         const { err } = this.state;
 
         if (err) {
@@ -210,124 +226,161 @@ class RegistrationForm extends Component {
         return null;
     }
 
+    renderCountries() {
+        if (Countries != null && Countries.length > 0) {
+            return _.map(Countries, (val, id) => {
+                return <Option value={val.iso3} key={id}>{val.name}</Option>
+            });
+        }
+
+        return <Empty />;
+    }
+
+
     render() {
         const { showAgreement, isAgree, loading } = this.state;
-        const { getFieldDecorator } = this.props.form;
-
-        const prefixSelector = getFieldDecorator('prefix', {
-            initialValue: '+1',
-        })(
-            <Select style={{ width: 110 }}>
-                {_.map(PhoneCodes, (v, k) => {
-                    return (
-                        <Option value={v} key={k}>
-                            <img className="option-phone-flag" src={Flags[k]} alt={k} />
-                            <span className="option-phone-code">{v}</span>
-                        </Option>
-                    );
-                })}
-            </Select>,
-        );
 
         return (
             <Fragment>
-                <Form {...formItemLayout} onSubmit={this.handleSubmit}>
-                    <Form.Item label={i18next.t('auth.register.email')} hasFeedback>
-                        {getFieldDecorator('email', {
-                            initialValue: INIT_VALUES['email'],
-                            rules: [
-                                {
-                                    required: true,
-                                    message: i18next.t('auth.register.errors.empty_email'),
-                                },
-                                {
-                                    validator: this.validateEmail
-                                }
-                            ],
-                        })(<Input />)}
+                <Form
+                    ref={this.formRef}
+                    {...formItemLayout}
+                    onFinish={this.handleFinish}
+                    initialValues={{
+                        email: INIT_VALUES['email'],
+                        password: INIT_VALUES['password'],
+                        confirm: INIT_VALUES['confirm'],
+                        country: INIT_VALUES['country'],
+                        prefix: INIT_VALUES['prefix'],
+                        phone: INIT_VALUES['phone'],
+                        agree: INIT_VALUES['agree']
+                    }}
+                >
+                    <Form.Item
+                        label={i18next.t('auth.register.email')}
+                        name="email"
+                        validateFirst
+                        //hasFeedback
+                        //validateStatus="validating"
+                        rules={[
+                            {
+                                required: true,
+                                message: i18next.t('auth.register.errors.empty_email'),
+                            },
+                            {
+                                type: 'email',
+                                message: i18next.t('auth.register.errors.wrong_email'),
+                            }
+                        ]}
+                    >
+                        <Input />
                     </Form.Item>
 
-                    <Form.Item label={i18next.t('auth.register.password')} hasFeedback>
-                        {getFieldDecorator('password', {
-                            initialValue: INIT_VALUES['password'],
-                            rules: [
-                                {
-                                    min: 6,
-                                    max: 20,
-                                    message: i18next.t('auth.register.errors.password_len_requirements')
-                                },
-                                {
-                                    required: true,
-                                    message: i18next.t('auth.register.errors.empty_password'),
-                                },
-                                {
-                                    pattern: /((?=.*d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})/,
-                                    message: i18next.t('auth.register.errors.password_special_requirements'),
-                                },
-                                {
-                                    validator: this.validateToNextPassword,
-                                },
-                            ],
-                        })(
-                            <Input.Password />
-                        )}
+                    <Form.Item
+                        label={i18next.t('auth.register.password')}
+                        name="password"
+                        rules={[
+                            {
+                                min: 6,
+                                max: 20,
+                                message: i18next.t('auth.register.errors.password_len_requirements')
+                            },
+                            {
+                                required: true,
+                                message: i18next.t('auth.register.errors.empty_password'),
+                            },
+                            {
+                                pattern: /((?=.*d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})/,
+                                message: i18next.t('auth.register.errors.password_special_requirements'),
+                            },
+                            (ref) => ({
+                                validator: (rule, value) => this.validateToNextPassword(rule, value, ref),
+                            }),
+                        ]}
+                    >
+                        <Input.Password />
                     </Form.Item>
 
-                    <Form.Item label={i18next.t('auth.register.confirm_password')} hasFeedback>
-                        {getFieldDecorator('confirm', {
-                            initialValue: INIT_VALUES['confirm'],
-                            rules: [
-                                {
-                                    required: true,
-                                    message: i18next.t('auth.register.errors.empty_confirm_password'),
-                                },
-                                {
-                                    validator: this.compareToFirstPassword,
-                                },
-                            ],
-                        })(<Input.Password onBlur={this.handleConfirmBlur} />)}
+                    <Form.Item
+                        label={i18next.t('auth.register.confirm_password')}
+                        name="confirm"
+                        rules={[
+                            {
+                                required: true,
+                                message: i18next.t('auth.register.errors.empty_confirm_password'),
+                            },
+                            (ref) => ({
+                                validator: (rule, value) => this.compareToFirstPassword(rule, value, ref),
+                            }),
+
+                        ]}
+                    >
+                        <Input.Password onBlur={this.handleConfirmBlur.bind(this)} />
                     </Form.Item>
 
-                    <Form.Item label={i18next.t('auth.register.country')}>
-                        {getFieldDecorator('country', {
-                            initialValue: INIT_VALUES['country'],
-                            rules: [
-                                {
-                                    type: 'string',
-                                    required: true,
-                                    message: i18next.t('auth.register.errors.empty_country')
-                                },
-                            ],
-                        })(<Select
+                    <Form.Item
+                        label={i18next.t('auth.register.country')}
+                        name="country"
+                        rules={[
+                            {
+                                type: 'string',
+                                required: true,
+                                message: i18next.t('auth.register.errors.empty_country')
+                            },
+                        ]}
+                    >
+                        <Select
                             showSearch
                             placeholder={i18next.t('auth.register.country')}
                             optionFilterProp="children"
-                            filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                            }
+                            filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
                         >
-                            {this._renderCountries()}
-                        </Select>)}
+                            {this.renderCountries()}
+                        </Select>
                     </Form.Item>
+
 
                     <Form.Item label={i18next.t('auth.register.phone_number')}>
-                        {getFieldDecorator('phone', {
-                            initialValue: INIT_VALUES['phone'],
-                            rules: [{ required: true, message: i18next.t('auth.register.errors.empty_phone') }],
-                        })(<Input addonBefore={prefixSelector} style={{ width: '100%' }} />)}
+                        <Input.Group compact>
+                            <Form.Item
+                                name="prefix"
+                                rules={[{ required: true, message: i18next.t('auth.register.errors.empty_phone') }]}
+                            >
+                                <Select
+                                    style={{ width: 110 }}
+                                    onChange={this.handlePrefixChange}
+                                >
+                                    {_.map(PhoneCodes, (v, k) => {
+                                        return (
+                                            <Option value={v} key={k}>
+                                                <img className="option-phone-flag" src={Flags[k]} alt={k} />
+                                                <span className="option-phone-code">{v}</span>
+                                            </Option>
+                                        );
+                                    })}
+                                </Select>
+                            </Form.Item>
+
+                            <Form.Item
+                                name={"phone"}
+                                rules={[{ required: true, message: i18next.t('auth.register.errors.empty_phone') }]}
+                            >
+                                <Input style={{ width: '100%' }} />
+                            </Form.Item>
+                        </Input.Group>
                     </Form.Item>
 
-                    <Form.Item {...tailFormItemLayout}>
-                        {getFieldDecorator('agree', {
-                            initialValue: INIT_VALUES['agree'],
-                            rules: [{ required: true }]
-                        })(
-                            <Checkbox checked={isAgree} onChange={(val) => this._handleAgreeChange(val)}>
-                                {i18next.t('auth.register.i_have_read')} <Button className="ant-link-button" onClick={() => this._onAgreementPress()} type="link" >{i18next.t('auth.register.licence_agreement')}</Button>
-                            </Checkbox>,
-                        )}
+                    <Form.Item
+                        {...tailFormItemLayout}
+                        name="agree"
+                        rules={[{ required: true }]}
+                    >
+                        <Checkbox checked={isAgree} onChange={this.handleAgreeChange}>
+                            {i18next.t('auth.register.i_have_read')} <Button className="ant-link-button" onClick={this.onAgreementPress} type="link" >{i18next.t('auth.register.licence_agreement')}</Button>
+                        </Checkbox>
                     </Form.Item>
 
-                    {this._renderError()}
+                    {this.renderError()}
 
                     <Form.Item {...tailFormItemLayout}>
                         <div className="submit-button centered">
@@ -348,15 +401,21 @@ class RegistrationForm extends Component {
                     width={720}
                     title={i18next.t('auth.register.terms_of_use')}
                     visible={showAgreement}
-                    onOk={() => this._agrementHandleOk()}
-                    onCancel={() => this._agrementHandleCancel()}
+                    onOk={this.agrementHandleOk}
+                    onCancel={this.agrementHandleCancel}
                 >
                     <div className="content" dangerouslySetInnerHTML={{ __html: agreeementHTML }}></div>
                 </Modal>
-            </Fragment>
+            </Fragment >
         );
     }
 }
+
+FirstRegistrationStep.propTypes = {
+    api: PropTypes.object,
+    registerConfirmCode: PropTypes.func,
+    registrationDone: PropTypes.func,
+};
 
 const formItemLayout = {
     labelCol: {
@@ -381,8 +440,6 @@ const tailFormItemLayout = {
         },
     },
 };
-
-const FirstRegistrationStep = Form.create({ name: 'register' })(RegistrationForm);
 
 const mapStateToProps = (state) => {
     const { api } = state.context;

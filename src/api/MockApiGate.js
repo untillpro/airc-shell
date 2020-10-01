@@ -288,8 +288,9 @@ class MockApiGate {
             result: err.length <= 0,
             err,
             ttl: ttl,
-            token: !confirmed ? MOCK_CONFIRM_TOKEN : null,
-            confirmed: false
+            token: confirmed ? MOCK_CONFIRM_TOKEN : null,
+            confirmed,
+            email
         };
     }
 

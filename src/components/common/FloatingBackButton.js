@@ -3,7 +3,10 @@
  */
 
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { Button } from 'antd';
+import { ArrowLeftOutlined} from '@ant-design/icons'
+import { motion } from "framer-motion";
 
 export default class FloatingBackButton extends PureComponent {
     _onClick() {
@@ -16,16 +19,25 @@ export default class FloatingBackButton extends PureComponent {
 
     render() {
         return (
-            <div className="state-back-button">
+            <motion.div 
+                className="state-back-button"
+                initial={{scale: 0}}
+                animate={{ scale: 1 }}
+                transition={{ delay: 0.5 }}
+            >
                 <Button
                     key="back-button"
                     onClick={() => this._onClick()}
                     type="primary"
                     shape="circle"
-                    icon="arrow-left"
+                    icon={<ArrowLeftOutlined />}
                     size='large'
                 />
-            </div>
+            </motion.div>
         );
     }
 }
+
+FloatingBackButton.propTypes = {
+    onClick: PropTypes.func,
+};
