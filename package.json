@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "airc-shell-core": "file:src/base",
-    "antd": "^4.6.6",
     "axios": "^0.19.2",
     "classnames": "^2.2.6",
     "color-shorthand-hex-to-six-digit": "^2.10.56",
