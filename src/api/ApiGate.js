@@ -162,7 +162,6 @@ class ApiGate {
         } = props;
 
         console.log('collection method call:', token, type, wsids, entries, page, page_size, show_deleted);
-
         
         const params = {};
         let location = null;
