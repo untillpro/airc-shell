@@ -3,7 +3,6 @@
  */
 
 import initState from 'utils/InitState';
-//import Logger from 'base/classes/Logger';
 
 import {
     INIT_STATE,
