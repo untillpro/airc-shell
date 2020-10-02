@@ -14,6 +14,7 @@ if (isProd.isDevelopment()) {
 } else {
     cfg.API_HOST = "/api";
     //cfg.API_HOST = "https://airtest.untill.ru/airs-router";
+    
 }
 
 export default cfg;
