@@ -13,7 +13,6 @@ if (isProd.isDevelopment()) {
     //cfg.API_HOST = "https://airtest.untill.ru/airs-router";
 } else {
     cfg.API_HOST = "/api";
-    //cfg.API_HOST = "http://kvvw10:8822/api";
     //cfg.API_HOST = "https://airtest.untill.ru/airs-router";
 }
 
