@@ -344,7 +344,7 @@ class MockApiGate {
             page_size, 
             show_deleted, 
             required_fields, 
-            required_classificators 
+            required_classifiers 
         } = props;
 
         const params = {};
@@ -379,8 +379,8 @@ class MockApiGate {
             params['Fields'] = required_fields;
         }
 
-        if (required_classificators && _.isArray(required_classificators) && required_classificators.length > 0) {
-            params['RequiredClassifiers'] = required_classificators;
+        if (required_classifiers && _.isArray(required_classifiers) && required_classifiers.length > 0) {
+            params['RequiredClassifiers'] = required_classifiers;
         }
 
         if (entries && _.isArray(entries) && entries.length > 0) {

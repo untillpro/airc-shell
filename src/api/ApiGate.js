@@ -158,7 +158,7 @@ class ApiGate {
             page_size, 
             show_deleted, 
             required_fields, 
-            required_classificators 
+            required_classifiers 
         } = props;
 
         console.log('collection method call:', token, type, wsids, entries, page, page_size, show_deleted);
@@ -207,8 +207,8 @@ class ApiGate {
             params['Fields'] = required_fields;
         }
 
-        if (required_classificators && _.isArray(required_classificators) && required_classificators.length > 0) {
-            params['RequiredClassifiers'] = required_classificators;
+        if (required_classifiers && _.isArray(required_classifiers) && required_classifiers.length > 0) {
+            params['RequiredClassifiers'] = required_classifiers;
         }
 
         return this.invoke('airs-bp', location, 'collection', token, params)
