@@ -152,20 +152,20 @@ class ApiGate {
     }
 
     async collection(token, type, wsids, props = {}) {
-        const { 
-            entries, 
-            page, 
-            page_size, 
-            show_deleted, 
-            required_fields, 
-            required_classifiers 
+        const {
+            entries,
+            page,
+            page_size,
+            show_deleted,
+            required_fields,
+            required_classifiers
         } = props;
 
         console.log('collection method call:', token, type, wsids, entries, page, page_size, show_deleted);
-        
+
         const params = {};
         let location = null;
-        
+
         if (type && typeof type === 'string') {
             params['Type'] = type;
         } else {
@@ -252,8 +252,12 @@ class ApiGate {
             params['ToDateTime'] = parseInt(to);
         }
 
-        if (type !== null && type !== undefined && typeof type === 'string') {   
-            params['Type'] = type;
+        if (!_.isNil(type)) {
+            if (_.isString(type)) {
+                params['Type'] = [ type ];
+            } else if (_.isArray(type)) {
+                params['Type'] = type;
+            }   
         }
 
         if (from_offset) {
