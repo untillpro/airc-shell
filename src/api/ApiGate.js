@@ -232,7 +232,7 @@ class ApiGate {
     async log(token, wsids, props) {
         //TODO - stub. most likely it will be changed
         console.log('log method call:', token, props);
-        const { from, to, type, from_offset, to_offset, show } = props;
+        const { from, to, type, from_offset, to_offset, show, filterBy, required_classifiers } = props;
 
         const params = {};
         let location = null;
@@ -268,6 +268,18 @@ class ApiGate {
 
         if (to_offset && to_offset > 0) {
             params['ToOffset'] = parseInt(to_offset);
+        }
+
+        if (filterBy) {
+            if (_.isPlainObject(filterBy)) {
+                params['FilterBy'] = JSON.stringify(filterBy);
+            } else if (_.isString(filterBy)) {
+                params['FilterBy'] = filterBy;
+            }
+        }
+
+        if (required_classifiers && _.isArray(required_classifiers)) {
+            params['RequiredClassifiers'] = required_classifiers;
         }
 
         if (show === true) {
