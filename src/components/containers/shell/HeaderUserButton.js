@@ -5,8 +5,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Button, Dropdown, Menu, Modal } from 'base/components';
-import { Avatar } from 'antd';
+import { Button, Dropdown, Menu } from 'base/components';
+import { Modal, Avatar } from 'antd';
 import { Link } from "react-router-dom";
 //import Logger from 'base/classes/Logger';
 import { doLogout } from 'actions';
