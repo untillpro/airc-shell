@@ -3,7 +3,8 @@
  */
 
 import { Component } from 'react';
-import iframeApi from 'iframe-api';
+import PropTypes from 'prop-types';
+import iframeApi from '../base/modules/iframe-api';
 import { connect } from 'react-redux';
 
 import {
@@ -23,29 +24,52 @@ import URemoteAPIGate from 'base/classes/URemoteAPIGate';
 import Logger from 'base/classes/Logger';
 
 class ApiProvider extends Component {
-    componentDidMount() {
-        const API = {
+    constructor(props) {
+        super(props);
+
+        this.API = {
             do: (queueId, path, params, method) => this._invokeApiMethod('invoke', queueId, path, params, method),
             sendError: (text, descr, lifetime, hideClose) => this._sendNotify(text, descr, ERROR, lifetime, hideClose),
             sendWarning: (text, descr, lifetime, hideClose) => this._sendNotify(text, descr, WARNING, lifetime, hideClose),
             sendSuccess: (text, descr, lifetime, hideClose) => this._sendNotify(text, descr, SUCCESS, lifetime, hideClose),
             sendInfo: (text, descr, lifetime, hideClose) => this._sendNotify(text, descr, INFO, lifetime, hideClose),
-            moduleLoaded: () => this._onModuleLoaded(),
+            moduleLoaded: (api) => this._onModuleLoaded(api),
             conf: (operations, wsids, timestamp, offset) => this._invokeApiMethod('conf', operations, wsids, timestamp, offset), //TODO
             collection: (type, wsids, entries, page, page_size, show_deleted) => this._invokeApiMethod('collection', type, wsids, entries, page, page_size, show_deleted), //TODO
             sync: (entries) => this._invokeApiMethod('sync', entries), //TODO
             log: (wsids, params) => this._invokeApiMethod('log', wsids, params), //TODO
         };
-    
-        iframeApi(API).then((api) => {
-            console.log('Received remote api in shell: ', api);
-            if (api) {
+    }
 
-                this.props.setRemoteApi(new URemoteAPIGate(api));
-            }
-          }, function (err) {
-            throw new Error('Shell error: Could not get iframe api', err);
-          });
+    componentDidMount() {
+        this._initApi();
+    }
+
+    componentDidUpdate(oldProps) {
+        const { application } = this.props;
+
+        if (application !== oldProps.application) {
+            //this._initApi();
+        }
+    }
+
+    _initApi() {
+        try {
+            iframeApi(this.API)
+                .then((api) => {
+                    console.log('Received remote api in shell: ', api);
+                    if (api) {
+                        this.props.setRemoteApi(new URemoteAPIGate(api));
+                    }
+                }, function (err) {
+                    throw new Error('Shell error: Could not get iframe api', err);
+                })
+                .catch((e) => {
+                    console.error("ApiProvider.iframeApi init error: ", e);
+                });
+        } catch (ex) {
+            console.error("ApiProvider.iframeApi exception catched: ", ex);
+        }
     }
 
     _getInitData() {
@@ -100,19 +124,31 @@ class ApiProvider extends Component {
     }
 }
 
+ApiProvider.propTypes = {
+    children: PropTypes.node,
+    api: PropTypes.object,
+    rights: PropTypes.object,
+    application: PropTypes.string,
+    view: PropTypes.string,
+    token: PropTypes.string,
+    addShellNotifyMessage: PropTypes.func,
+    setRemoteApi: PropTypes.func,
+
+};
+
 const mapStateToProps = (state) => {
     const { api, applicationPath: path } = state.context;
-    const { token, rights, view } = state.shell;
+    const { token, rights, application, view } = state.shell;
 
     return {
         api,
         path,
         token,
         rights,
+        application,
         view
     };
 }
-
 
 export default connect(mapStateToProps, {
     addShellNotifyMessage,

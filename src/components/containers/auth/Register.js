@@ -3,10 +3,12 @@
  */
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from "react-router";
 import { Steps } from 'antd';
 import i18next from 'i18next';
+import { motion } from "framer-motion";
 
 import * as STEPS from './register/';
 
@@ -54,7 +56,11 @@ class RegistrationForm extends Component {
         return (
             <div className="ushell-container flex">
                 <div className="ushell-login-container register">
-                    <div className="ushell-login-block paper">
+                    <motion.div 
+                        className="ushell-login-block paper"
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                    >
                         <Steps current={current}>
                             {steps.map((item) => {
                                 const t = item.title();
@@ -66,12 +72,18 @@ class RegistrationForm extends Component {
                         <div className="form-block-step-content">{ContentComponent ? <ContentComponent /> : null}</div>
 
                         <FloatingBackButton onClick={this._handleBackClick} />
-                    </div>
+                    </motion.div>
                 </div>
             </div>
         );
     }
 }
+
+RegistrationForm.propTypes = {
+    current: PropTypes.string,
+    history: PropTypes.object.isRequired,
+    dropRegisterStep: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = (state) => {
     const { registerStep } = state.auth;

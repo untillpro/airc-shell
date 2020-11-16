@@ -3,13 +3,15 @@
  */
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Button, Icon, Dropdown, Menu, Modal } from 'base/components';
-import { Avatar } from 'antd';
+import { Button, Dropdown, Menu } from 'base/components';
+import { Modal, Avatar } from 'antd';
 import { Link } from "react-router-dom";
 //import Logger from 'base/classes/Logger';
 import { doLogout } from 'actions';
 import i18next from 'i18next';
+import { LogoutOutlined } from '@ant-design/icons';
 
 class HeaderUserButton extends Component {
     quit() {
@@ -52,7 +54,7 @@ class HeaderUserButton extends Component {
                 <Menu.Item
                     onClick={() => this.quit()}
                 >
-                    <Icon type="logout" />
+                    <LogoutOutlined />
                     {i18next.t('shell.user_menu.sign_out')}
                 </Menu.Item>
             </Menu>
@@ -74,6 +76,10 @@ class HeaderUserButton extends Component {
             </Dropdown>
         );
     }
+}
+
+HeaderUserButton.propTypes = {
+    doLogout: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state) => {

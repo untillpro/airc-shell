@@ -288,8 +288,9 @@ class MockApiGate {
             result: err.length <= 0,
             err,
             ttl: ttl,
-            token: !confirmed ? MOCK_CONFIRM_TOKEN : null,
-            confirmed: false
+            token: confirmed ? MOCK_CONFIRM_TOKEN : null,
+            confirmed,
+            email
         };
     }
 
@@ -334,19 +335,18 @@ class MockApiGate {
         return this.invoke('airs-bp', location, 'conf', token, params);
     }
 
-    async collection(token, type, wsids, entries, page, page_size, show_deleted) {
+    async collection(token, type, wsids, props = {}) {
         console.log('collection method call:', token, type, wsids, entries, page, page_size, show_deleted);
-
-        /*
+        
         const { 
             entries, 
             page, 
             page_size, 
             show_deleted, 
             required_fields, 
-            required_classificators 
+            required_classifiers,
+            filter_by
         } = props;
-        */
 
         const params = {};
         let location = null;
@@ -376,15 +376,17 @@ class MockApiGate {
             params['PageSize'] = null;
         }
 
-        /*
         if (required_fields && _.isArray(required_fields) && required_fields.length > 0) {
             params['Fields'] = required_fields;
         }
 
-        if (required_classificators && _.isArray(required_classificators) && required_classificators.length > 0) {
-            params['RequiredClassifiers'] = required_classificators;
+        if (required_classifiers && _.isArray(required_classifiers) && required_classifiers.length > 0) {
+            params['RequiredClassifiers'] = required_classifiers;
         }
-        */
+
+        if (filter_by && _.isString(filter_by)) {
+            params['FilterBy'] = filter_by;
+        }
 
         if (entries && _.isArray(entries) && entries.length > 0) {
             params['Entries'] = entries;
@@ -419,7 +421,7 @@ class MockApiGate {
     async log(token, wsids, props) {
         //TODO - stub. most likely it will be changed
         console.log('log method call:', token, props);
-        const { from, to, type, from_offset, to_offset, show } = props;
+        const { from, to, type, from_offset, to_offset, show, filterBy, required_classifiers } = props;
 
         const params = {};
         let location = null;
@@ -433,15 +435,19 @@ class MockApiGate {
         }
 
         if (_.isNumber(from) && from >= 0) {
-            params['From'] = parseInt(from);
+            params['FromDateTime'] = parseInt(from);
         }
 
         if (_.isNumber(to) && to > 0) {
-            params['To'] = parseInt(to);
+            params['ToDateTime'] = parseInt(to);
         }
 
-        if (type !== null && type !== undefined && typeof type === 'string') {
-            params['Type'] = type;
+        if (!_.isNil(type)) {
+            if (_.isString(type)) {
+                params['Type'] = [ type ];
+            } else if (_.isArray(type)) {
+                params['Type'] = type;
+            }   
         }
 
         if (from_offset) {
@@ -452,6 +458,18 @@ class MockApiGate {
 
         if (to_offset && to_offset > 0) {
             params['ToOffset'] = parseInt(to_offset);
+        }
+
+        if (filterBy) {
+            if (_.isPlainObject(filterBy)) {
+                params['FilterBy'] = JSON.stringify(filterBy);
+            } else if (_.isString(filterBy)) {
+                params['FilterBy'] = filterBy;
+            }
+        }
+
+        if (required_classifiers && _.isArray(required_classifiers)) {
+            params['RequiredClassifiers'] = required_classifiers;
         }
 
         params['Show'] = !!show;

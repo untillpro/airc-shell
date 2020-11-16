@@ -3,7 +3,6 @@
  */
 
 import React, { Component } from 'react';
-
 import { Badge, Button, BaseIcon } from 'base/components';
 
 class HeaderNotifyButton extends Component {

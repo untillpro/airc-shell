@@ -3,6 +3,7 @@
  */
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
     Form,
@@ -29,15 +30,19 @@ class SecondStep extends Component {
             confirmDirty: false,
             autoCompleteResult: [],
         };
+
+        this.formRef = null;
     }
 
 
-    handleSubmit = e => {
+    handleSubmit(e) {
         const { api } = this.props;
 
         e.preventDefault();
 
-        this.props.form.validateFieldsAndScroll((err, values) => {
+        if (!this.formRef) return;
+
+        this.formRef.validateFieldsAndScroll((err, values) => {
             if (!err) {
                 this.setState({
                     err: null,
@@ -46,18 +51,18 @@ class SecondStep extends Component {
 
                 setTimeout(() => {
                     api.reset(values)
-                    .then((res) => {
-                        const r = checkResponse(res);
+                        .then((res) => {
+                            const r = checkResponse(res);
 
-                        if (r === true) {
-                            this.props.resetPasswordSuccess();
-                        } else {
-                            this.setState({ err: r, loading: false });
-                        }
-                    })
-                    .catch((e) => {
-                        this.setState({ err: e.message, loading: false });
-                    });
+                            if (r === true) {
+                                this.props.resetPasswordSuccess();
+                            } else {
+                                this.setState({ err: r, loading: false });
+                            }
+                        })
+                        .catch((e) => {
+                            this.setState({ err: e.message, loading: false });
+                        });
                 }, 1000);
             } else {
                 this.setState({ err: null });
@@ -65,25 +70,22 @@ class SecondStep extends Component {
         });
     };
 
-    handleConfirmBlur = e => {
+    handleConfirmBlur(e) {
         const { value } = e.target;
         this.setState({ confirmDirty: this.state.confirmDirty || !!value });
     };
 
-    compareToFirstPassword = (rule, value, callback) => {
-        const { form } = this.props;
-        if (value && value !== form.getFieldValue('password')) {
+    compareToFirstPassword(rule, value, callback) {
+        if (value && value !== this.formRef.getFieldValue('password')) {
             callback(i18next.t('auth.forgot.errors.inconsistent_passwords'));
         } else {
             callback();
         }
     };
 
-    validateToNextPassword = (rule, value, callback) => {
-        const { form } = this.props;
-
+    validateToNextPassword(rule, value, callback) {
         if (value && this.state.confirmDirty) {
-            form.validateFields(['confirm'], { force: true });
+            this.formRef.validateFields(['confirm'], { force: true });
         }
 
         callback();
@@ -105,61 +107,67 @@ class SecondStep extends Component {
 
     render() {
         const { loading } = this.state;
-        const { getFieldDecorator } = this.props.form;
 
         return (
-            <Form {...formItemLayout} onSubmit={this.handleSubmit}>
-                <Form.Item label="Token" hasFeedback>
-                    {getFieldDecorator('token', {
-                        initialValue: INIT_VALUES['token'],
-                        rules: [
-                            {
-                                required: true,
-                                message: i18next.t('auth.forgot.errors.empty_token'),
-                            }
-                        ],
-                    })(<Input />)}
+            <Form {...formItemLayout} onSubmit={this.handleSubmit.bind(this)} ref={this.formRef}>
+                <Form.Item
+                    label="Token"
+                    name="token"
+                    hasFeedback
+                    initialValue={INIT_VALUES['token']}
+                    rules={[
+                        {
+                            required: true,
+                            message: i18next.t('auth.forgot.errors.empty_token'),
+                        }
+                    ]}
+                >
+                    <Input />
                 </Form.Item>
 
-                <Form.Item label={i18next.t('auth.forgot.password_label')} hasFeedback>
-                    {getFieldDecorator('password', {
-                        initialValue: INIT_VALUES['password'],
-                        rules: [
-                            {
-                                min: 6,
-                                max: 20,
-                                message: i18next.t('auth.forgot.errors.password_len_requirements')
-                            },
-                            {
-                                required: true,
-                                message: i18next.t('auth.forgot.errors.empty_password'),
-                            },
-                            {
-                                pattern: /((?=.*d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})/,
-                                message: i18next.t('auth.forgot.errors.password_special_requirements'),
-                            },
-                            {
-                                validator: this.validateToNextPassword,
-                            },
-                        ],
-                    })(
-                        <Input.Password />
-                    )}
+                <Form.Item
+                    label={i18next.t('auth.forgot.password_label')}
+                    name="password"
+                    hasFeedback
+                    initialValue={INIT_VALUES['password']}
+                    rules={[
+                        {
+                            min: 6,
+                            max: 20,
+                            message: i18next.t('auth.forgot.errors.password_len_requirements')
+                        },
+                        {
+                            required: true,
+                            message: i18next.t('auth.forgot.errors.empty_password'),
+                        },
+                        {
+                            pattern: /((?=.*d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})/,
+                            message: i18next.t('auth.forgot.errors.password_special_requirements'),
+                        },
+                        {
+                            validator: this.validateToNextPassword,
+                        },
+                    ]}
+                >
+                    <Input.Password />
                 </Form.Item>
 
-                <Form.Item label={i18next.t('auth.forgot.confirm_label')} hasFeedback>
-                    {getFieldDecorator('confirm', {
-                        initialValue: INIT_VALUES['confirm'],
-                        rules: [
-                            {
-                                required: true,
-                                message: i18next.t('auth.forgot.errors.empty_confirm'),
-                            },
-                            {
-                                validator: this.compareToFirstPassword,
-                            },
-                        ],
-                    })(<Input.Password onBlur={this.handleConfirmBlur} />)}
+                <Form.Item
+                    label={i18next.t('auth.forgot.confirm_label')}
+                    name="confirm"
+                    hasFeedback
+                    initialValue={INIT_VALUES['confirm']}
+                    rules={[
+                        {
+                            required: true,
+                            message: i18next.t('auth.forgot.errors.empty_confirm'),
+                        },
+                        {
+                            validator: this.compareToFirstPassword,
+                        },
+                    ]}
+                >
+                    <Input.Password onBlur={this.handleConfirmBlur} />
                 </Form.Item>
 
 
@@ -177,7 +185,7 @@ class SecondStep extends Component {
                         </Button>
                     </div>
                 </Form.Item>
-            </Form>
+            </Form >
         );
     }
 }
@@ -206,15 +214,17 @@ const tailFormItemLayout = {
     },
 };
 
-
-const ForgotSecondStep = Form.create({ name: 'forgot' })(SecondStep);
+SecondStep.propTypes = {
+    api: PropTypes.object.isRequired,
+    resetPasswordSuccess: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = (state) => {
     const { api } = state.context;
-    
+
     return {
         api
     };
 };
 
-export default connect(mapStateToProps, { resetPasswordSuccess })(ForgotSecondStep);
+export default connect(mapStateToProps, { resetPasswordSuccess })(SecondStep);

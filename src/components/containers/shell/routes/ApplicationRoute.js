@@ -4,6 +4,7 @@
 
 import _ from 'lodash';
 import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Spin } from 'antd';
 import {
@@ -159,6 +160,17 @@ class ApplicationRoute extends Component {
     }
 }
 
+ApplicationRoute.propTypes = {
+    path: PropTypes.string,
+    remoteApi: PropTypes.object,
+    application: PropTypes.string,
+    view: PropTypes.string,
+    manifest: PropTypes.object,
+    selectView: PropTypes.func,
+    selectPlugin: PropTypes.func, 
+    setApplicationPath: PropTypes.func,
+};
+
 const mapStateToProps = (state) => {
     const { application, view, manifest } = state.shell;
     const { remoteApi, applicationPath: path } = state.context;
@@ -169,5 +181,6 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, { 
     selectView,
     selectPlugin, 
-    setApplicationPath
+    setApplicationPath,
+    
  })(ApplicationRoute);

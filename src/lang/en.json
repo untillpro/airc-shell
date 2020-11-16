@@ -43,6 +43,7 @@
                 "errors": {
                     "not_equal_passwords": "Two passwords that you enter is not equal!",
                     "empty_email": "Please input your E-mail!",
+                    "wrong_email": "Please input correct E-mail address!",
                     "password_len_requirements": "Password must be min 6 and max 20 characters",
                     "password_special_requirements": "Password should contain: A-Z, a-z, 0-9, special chars.",
                     "empty_password": "Please input your password!",

@@ -1,17 +1,18 @@
 {
   "name": "airc-shell",
-  "version": "0.1.13",
+  "version": "0.1.25",
   "private": true,
   "dependencies": {
-    "antd": "^3.26.7",
+    "airc-shell-core": "file:src/base",
     "axios": "^0.19.2",
     "classnames": "^2.2.6",
     "color-shorthand-hex-to-six-digit": "^2.10.56",
     "formik": "^1.5.8",
+    "framer-motion": "^2.7.6",
     "i18next": "^19.3.3",
     "iframe-api": "^0.10.0",
     "js-cookie": "^2.2.1",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.11",
     "moment": "^2.24.0",
     "qs": "^6.9.1",
     "react": "^16.12.0",
@@ -32,7 +33,6 @@
     "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0",
     "self-addressed": "^0.3.0",
-    "styled-components": "^5.0.1",
     "yup": "^0.27.0"
   },
   "scripts": {
@@ -52,6 +52,7 @@
   ],
   "devDependencies": {
     "autoprefixer": "^9.7.4",
+    "eslint-plugin-react": "^7.20.6",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^6.1.0",
     "gulp-postcss": "^8.0.0",

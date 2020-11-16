@@ -3,14 +3,15 @@
  */
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
     Typography,
     Form,
     Input,
-    Button,
-    Icon
+    Button
 } from 'antd';
+import { MailOutlined } from '@ant-design/icons';
 import i18next from 'i18next';
 import { checkResponse } from 'utils/AuthHelpers';
 import { forgotChangePassword, userShouldConfirm } from 'actions/';
@@ -25,53 +26,51 @@ class FirstStep extends Component {
             err: '',
             loading: false
         };
+
+        this.formRef = null;
+        this.onFinish = this.onFinish.bind(this);
     }
 
-    handleSubmit = e => {
+    onFinish(values) {
         const { api } = this.props;
 
-        e.preventDefault();
-
-        this.props.form.validateFieldsAndScroll((err, values) => {
-            if (!err) {
-                this.setState({
-                    err: null,
-                    loading: true
-                });
-
-                setTimeout(() => {
-                    api.forgot(values)
-                        .then((res) => {
-                            const r = checkResponse(res);
-
-                            if (r === true) {
-                                if (res.confirmed === true) {
-                                    this.props.forgotChangePassword(
-                                        res.email,
-                                        res.ttl
-                                    );
-                                } else {
-                                    this.props.userShouldConfirm(
-                                        res.email,
-                                        res.token,
-                                        res.ttl
-                                    );
-                                }
-                            } else {
-                                this.setState({ err: r, loading: false });
-                            }
-                        })
-                        .catch((e) => {
-                            this.setState({ err: e.message, loading: false });
-                        });
-                }, 1000);
-            } else {
-                this.setState({ err: null });
-            }
+        this.setState({
+            err: null,
+            loading: true
         });
+
+        setTimeout(() => {
+            api.forgot(values)
+                .then((res) => {
+                    console.log("forgot res: ", res);
+                    
+                    const r = checkResponse(res);
+
+                    if (r === true) {
+                        if (res.confirmed === true) {
+                            this.props.forgotChangePassword(
+                                res.email,
+                                res.ttl
+                            );
+                        } else {
+                            this.props.userShouldConfirm(
+                                res.email,
+                                res.token,
+                                res.ttl
+                            );
+                        }
+                    } else {
+                        this.setState({ err: r, loading: false });
+                    }
+                })
+                .catch((e) => {
+                    this.setState({ err: e.message, loading: false });
+                });
+        }, 1000);
+
     };
 
-    _renderError() {
+    renderError() {
         const { err } = this.state;
 
         if (err) {
@@ -87,36 +86,38 @@ class FirstStep extends Component {
 
     render() {
         const { loading } = this.state;
-        const { getFieldDecorator } = this.props.form;
 
         return (
-            <Form onSubmit={this.handleSubmit}>
+            <Form 
+                onFinish={this.onFinish}
+                name="forgot"
+            >
                 <div className='registration-text-block'>
                     <Text>{i18next.t('auth.forgot.enter_your_email_below')}</Text>
                 </div>
 
-                <Form.Item hasFeedback>
-                    {getFieldDecorator('email', {
-                        rules: [
-                            {
-                                type: 'email',
-                                message: i18next.t('auth.forgot.errors.invalid_email'),
-                            },
-                            {
-                                required: true,
-                                message: i18next.t('auth.forgot.errors.empty_email')
-                            }
-                        ],
-                    })(
-                        <Input
-                            prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                            placeholder={i18next.t('auth.forgot.enter_email')}
-                            size="large"
-                        />,
-                    )}
+                <Form.Item
+                    name="email"
+                    hasFeedback
+                    rules={[
+                        {
+                            type: 'email',
+                            message: i18next.t('auth.forgot.errors.invalid_email'),
+                        },
+                        {
+                            required: true,
+                            message: i18next.t('auth.forgot.errors.empty_email')
+                        }
+                    ]}
+                >
+                    <Input
+                        prefix={<MailOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
+                        placeholder={i18next.t('auth.forgot.enter_email')}
+                        size="large"
+                    />
                 </Form.Item>
 
-                {this._renderError()}
+                {this.renderError()}
 
                 <Form.Item>
                     <div className="submit-button centered">
@@ -135,6 +136,12 @@ class FirstStep extends Component {
     }
 }
 
+FirstStep.propTypes = {
+    api: PropTypes.object.isRequired,
+    forgotChangePassword: PropTypes.func.isRequired,
+    userShouldConfirm: PropTypes.func.isRequired
+};
+
 const mapStateToProps = (state) => {
     const { api } = state.context;
 
@@ -143,7 +150,4 @@ const mapStateToProps = (state) => {
     };
 };
 
-
-const ForgotFirstStep = Form.create({ name: 'forgot' })(FirstStep);
-
-export default connect(mapStateToProps, { forgotChangePassword, userShouldConfirm })(ForgotFirstStep);
+export default connect(mapStateToProps, { forgotChangePassword, userShouldConfirm })(FirstStep);

@@ -4,6 +4,7 @@
 
 import _ from 'lodash';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { NavLink } from "react-router-dom";
 
@@ -117,6 +118,11 @@ class HeaderApplicationsBar extends Component {
         return null;
     }
 }
+
+HeaderApplicationsBar.propTypes = {
+    VIEWS: PropTypes.object,
+    application: PropTypes.string,
+};
 
 const mapStateToProps = (state) => {
     const { application } = state.shell;

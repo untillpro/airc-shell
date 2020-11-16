@@ -1,9 +1,21 @@
 {
     "510000001": {
-        "name": "Journal",
-        "code": "journal",
-        "path": "/plugins/journal/index.html",
-        "order": 0,
+        "name": "Reports",
+        "code": "reports",
+        "methods": [
+            "view_change"
+        ],
+        "views": [
+            {
+                "name": "Basic",
+                "code": "basic_reports",
+                "type": "module",
+                "data": {},
+                "path": "/plugins/reports/index.html"
+            }
+        ],
+        "path": "/plugins/reports/index.html",
+        "order": 1,
         "id": 510000001
     },
     "510000002": {
@@ -44,7 +56,7 @@
             }
         ],
         "path": "/plugins/bo/index.html",
-        "order": 1,
+        "order": 2,
         "id": 510000002
     },
     "510000003": {
@@ -63,7 +75,14 @@
             }
         ],
         "path": "/plugins/app/index.html",
-        "order": 0,
+        "order": 3,
         "id": 510000003
+    },
+    "510000004": {
+        "name": "Journal",
+        "code": "journal",
+        "path": "/plugins/journal/index.html",
+        "order": 4,
+        "id": 510000004
     }
 }

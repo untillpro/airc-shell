@@ -3,6 +3,7 @@
  */
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Result, Button } from 'antd';
 import { withRouter } from "react-router";
 import i18next from 'i18next';
@@ -11,10 +12,10 @@ class ForgotThirdStep extends Component {
     constructor() {
         super();
 
-        this._handleClick = this._handleClick.bind(this);
+        this.handleClick = this.handleClick.bind(this);
     }
 
-    _handleClick() {
+    handleClick() {
         const { history } = this.props;
 
         history.push("/");
@@ -28,7 +29,7 @@ class ForgotThirdStep extends Component {
                 subTitle={i18next.t('auth.forgot.success_text')}
                 extra={[
                     <Button
-                        onClick={this._handleClick}
+                        onClick={this.handleClick}
                         type="primary"
                         key="start"
                     >
@@ -38,6 +39,10 @@ class ForgotThirdStep extends Component {
             />
         );
     }
+}
+
+ForgotThirdStep.propTypes = {
+    history: PropTypes.object.isRequired,
 }
 
 export default withRouter(ForgotThirdStep);

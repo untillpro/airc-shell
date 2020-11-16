@@ -4,6 +4,7 @@
 
 import _ from 'lodash';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { NavLink } from "react-router-dom";
 
@@ -112,6 +113,11 @@ class HeaderApplicationsBar extends Component {
         return null;
     }
 }
+
+HeaderApplicationsBar.propTypes = {
+    selectModule: PropTypes.func.isRequired,
+    applications: PropTypes.object,
+};
 
 const mapStateToProps = (state) => {
     const { APPS } = state.cp;
