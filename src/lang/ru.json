@@ -87,7 +87,7 @@
                 "sign_out": "Выход"
             },
             "footer": {
-                "copy": "&copy; <span id=\"dateyear\"></span> Untill. Все права защищены.",
+                "copy": "© {{year}} Untill. Все права защищены.",
                 "managment": "unTill Air Web Managment",
                 "version": "v.{{version}}"
             }
