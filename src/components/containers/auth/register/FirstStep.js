@@ -38,6 +38,8 @@ const INIT_VALUES = {
     "agree": true
 };
 
+const PASSWORD_REGEXP = /(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{6,20}/g;
+
 class FirstRegistrationStep extends Component {
     constructor() {
         super();
@@ -165,7 +167,7 @@ class FirstRegistrationStep extends Component {
 
     //compareToFirstPassword(rule, value, callback) {
     async compareToFirstPassword(rule, value, ref) {
-        console.log("compareToFirstPassword", ref);
+        //console.log("compareToFirstPassword", ref);
 
         if (value && value !== ref.getFieldValue('password')) {
             return Promise.reject(i18next.t('auth.register.errors.not_equal_passwords'));
@@ -175,7 +177,8 @@ class FirstRegistrationStep extends Component {
     };
 
     async validateToNextPassword(rule, value, ref) {
-        console.log("Ref: ", ref);
+        //console.log("Ref: ", ref);
+
         if (value && this.state.confirmDirty) {
             ref.validateFields(['confirm'], { force: true });
         }
@@ -290,7 +293,7 @@ class FirstRegistrationStep extends Component {
                                 message: i18next.t('auth.register.errors.empty_password'),
                             },
                             {
-                                pattern: /((?=.*d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})/,
+                                pattern: PASSWORD_REGEXP,
                                 message: i18next.t('auth.register.errors.password_special_requirements'),
                             },
                             (ref) => ({
