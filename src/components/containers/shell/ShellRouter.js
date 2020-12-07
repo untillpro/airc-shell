@@ -2,7 +2,7 @@
  * Copyright (c) 2020-present unTill Pro, Ltd.
  */
 
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import {
@@ -11,7 +11,11 @@ import {
     ApplicationRoute
 } from './routes';
 
-class ShellRouter extends Component {
+class ShellRouter extends PureComponent {
+    componentDidUpdate() {
+        console.log("ShellRouter component did update");
+    }
+
     render() {
         return (
             <Switch>

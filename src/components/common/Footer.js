@@ -3,6 +3,7 @@
  */
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import LangSelector from 'components/common/LangSelector';
 import i18next from 'i18next';
@@ -13,7 +14,6 @@ class Footer extends Component {
         Logger.debug(nextProps, 'Props:', 'Footer.shouldComponentUpdate()');
 
         if (nextProps.currentLanguage !== this.props.currentLanguage) {
-            console.log('--->   should rerender');
             return true;
         }
 
@@ -49,6 +49,10 @@ const mapStateToProps = (state) => {
     return {
         currentLanguage
     };
+};
+
+Footer.propTypes = {
+    currentLanguage: PropTypes.string
 };
 
 export default connect(mapStateToProps, {})(Footer);

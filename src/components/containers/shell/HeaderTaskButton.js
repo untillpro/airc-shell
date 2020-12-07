@@ -2,10 +2,10 @@
  * Copyright (c) 2020-present unTill Pro, Ltd.
  */
 
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Badge, Button, BaseIcon } from 'base/components';
 
-class HeaderTaskButton extends Component {
+class HeaderTaskButton extends PureComponent {
     render() {
         return (
             <Badge count={2}>

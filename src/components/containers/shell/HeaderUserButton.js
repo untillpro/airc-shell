@@ -2,18 +2,19 @@
  * Copyright (c) 2020-present unTill Pro, Ltd.
  */
 
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Button, Dropdown, Menu } from 'base/components';
+import i18next from 'i18next';
 import { Modal, Avatar } from 'antd';
 import { Link } from "react-router-dom";
-//import Logger from 'base/classes/Logger';
-import { doLogout } from 'actions';
-import i18next from 'i18next';
+
+import { Button, Dropdown, Menu } from 'base/components';
 import { LogoutOutlined } from '@ant-design/icons';
 
-class HeaderUserButton extends Component {
+import { doLogout } from 'actions';
+
+class HeaderUserButton extends PureComponent {
     quit() {
         const { doLogout } = this.props;
 
@@ -39,15 +40,15 @@ class HeaderUserButton extends Component {
                     </Link>
                 </Menu.Item>
 
-                
-                
-                {/*
-                <Menu.Divider />
-                
-                <Menu.Item>
-                    {i18next.t('shell.user_menu.criteria_sets')}
-                </Menu.Item>
-                */}
+                {
+                    /*
+                    <Menu.Divider />
+                    
+                    <Menu.Item>
+                        {i18next.t('shell.user_menu.criteria_sets')}
+                    </Menu.Item>
+                    */
+                }
                 
                 <Menu.Divider />
 

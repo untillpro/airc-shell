@@ -3,6 +3,7 @@
  */
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { withRouter } from "react-router";
 import { Result, Button } from 'antd';
 import i18next from 'i18next';
@@ -39,5 +40,9 @@ class ThirdStep extends Component {
     );
   }
 }
+
+ThirdStep.propTypes = {
+  history: PropTypes.object
+};
 
 export default withRouter(ThirdStep);

@@ -2,7 +2,8 @@
  * Copyright (c) 2020-present unTill Pro, Ltd.
  */
 
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 //components
@@ -24,13 +25,14 @@ import {
 import cfg from 'config.js';
 
 
-class Shell extends Component {
+class Shell extends PureComponent {
     constructor() {
         super();
         this.timer = null;
     }
     
     componentDidMount() {
+        console.log("Shell component did mount");
         this.props.checkAuthToken(true);
         this.props.loadManifest()
 
@@ -39,6 +41,10 @@ class Shell extends Component {
         this.timer = setInterval(() => {
             this.props.checkAuthToken(false);
         }, cfg.CHECK_INTERVAL);
+    }
+
+    componentDidUpdate() {
+        console.log("Shell component did update");
     }
     
     render() {
@@ -65,6 +71,11 @@ const mapStateToProps = (state) => {
         manifest, 
         token 
     };
+};
+
+Shell.propTypes = {
+    checkAuthToken: PropTypes.func,
+    loadManifest: PropTypes.func
 };
 
 export default connect(mapStateToProps, { loadManifest, checkAuthToken })(Shell);

@@ -3,6 +3,7 @@
  */
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Typography, Spin, Button } from 'antd';
 import moment from 'moment';
@@ -247,6 +248,17 @@ const mapStateToProps = (state) => {
         ttl,
         timeBeforeResend
     };
+};
+
+SecondStep.propTypes = {
+    token: PropTypes.string,
+    timeBeforeResend: PropTypes.number,
+    ttl: PropTypes.number,
+    confirmLen: PropTypes.number,
+    api: PropTypes.object, 
+    email: PropTypes.string,
+    registerConfirmCode: PropTypes.func,
+    registrationDone: PropTypes.func,
 };
 
 export default connect(mapStateToProps, { registrationDone, registerConfirmCode })(SecondStep);

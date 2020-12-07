@@ -1,4 +1,8 @@
 {
+    "name": "English",
+    "code": "0000",
+    "locale": "en",
+    "iso": "en-EN", 
     "translation": {
         "auth": {
             "login": {

@@ -1,4 +1,8 @@
 {
+    "name": "Русский",
+    "code": "0419",
+    "locale": "ru",
+    "iso": "ru-RU", 
     "translation": {
         "auth": {
             "login": {

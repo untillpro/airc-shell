@@ -69,7 +69,7 @@ export default (state = INITIAL_STATE, action) => {
             };
 
         case LAGUAGES_INITIATED: 
-            return setShellLanguages(state);
+            return setShellLanguages(state, action.payload);
 
         case SET_LANGUAGE: 
             return setCurrentLanguage(state, action.payload);

@@ -394,11 +394,7 @@ class MockApiGate {
             params['Entries'] = null;
         }
 
-        if (show_deleted === true) {
-            params['ShowDeleted'] = 1;
-        } else {
-            params['ShowDeleted'] = 0;
-        }
+        params['ShowDeleted'] = !!show_deleted;
 
         return this.invoke('airs-bp', location, 'collection', token, params)
             .then((res) => this._buildData(res));

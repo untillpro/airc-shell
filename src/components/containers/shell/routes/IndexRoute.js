@@ -2,12 +2,12 @@
  * Copyright (c) 2020-present unTill Pro, Ltd.
  */
 
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
 import "assets/css/index_route.css";
 
-class IndexRoute extends Component {
+class IndexRoute extends PureComponent {
     render() {
         return (
             <div className="index-route-container">

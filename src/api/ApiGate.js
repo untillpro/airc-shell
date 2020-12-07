@@ -198,11 +198,7 @@ class ApiGate {
             params['Entries'] = null;
         }
 
-        if (show_deleted === true) {
-            params['ShowDeleted'] = 1;
-        } else {
-            params['ShowDeleted'] = 0;
-        }
+        params['ShowDeleted'] = !!show_deleted;
 
         if (required_fields && _.isArray(required_fields) && required_fields.length > 0) {
             params['Fields'] = required_fields;

@@ -81,7 +81,6 @@ class ApplicationRoute extends Component {
         this.props.selectView(code);
 
         if (remoteApi && remoteApi.selectView && typeof remoteApi.selectView === 'function') {
-            console.log('selecting view ', code);
             remoteApi.selectView(code);
         }
     }
@@ -121,13 +120,7 @@ class ApplicationRoute extends Component {
 
         Logger.debug({remoteApi, view},'Loading finished');
         
-        this.setState({
-            loaded: true
-        });
-
-        if (view && remoteApi) {
-            remoteApi.selectView(view);
-        }
+        this.setState({ loaded: true });
     }
 
     render () {

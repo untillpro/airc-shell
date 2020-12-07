@@ -3,12 +3,11 @@
  */
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import Modal from './Modal';
-
 import { AuthForm } from 'components/forms';
-
 import { hideAuthModal } from 'actions';
 
 class Auth extends Component {
@@ -45,5 +44,9 @@ class Auth extends Component {
         );
     }
 }
+
+Auth.propTypes = {
+    hideAuthModal: PropTypes.func
+};
 
 export default connect(null, { hideAuthModal })(Auth);

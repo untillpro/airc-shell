@@ -49,17 +49,20 @@ class ApiProvider extends Component {
         const { application } = this.props;
 
         if (application !== oldProps.application) {
-            //this._initApi();
+            this._initApi();
         }
     }
 
     _initApi() {
+        const { view } = this.props;
+
         try {
             iframeApi(this.API)
                 .then((api) => {
                     console.log('Received remote api in shell: ', api);
                     if (api) {
-                        this.props.setRemoteApi(new URemoteAPIGate(api));
+                        this.remoteApi = new URemoteAPIGate(api);
+                        this.props.setRemoteApi(this.remoteApi);
                     }
                 }, function (err) {
                     throw new Error('Shell error: Could not get iframe api', err);
@@ -72,15 +75,36 @@ class ApiProvider extends Component {
         }
     }
 
+    _payload() {
+        const { ui, view } = this.props;
+        const { availableLangs, defaultLanguage, currentLanguage } = ui;
+        
+        return {
+            view,
+            option: {
+                defaultLanguage: availableLangs[defaultLanguage], 
+                currentLanguage: availableLangs[currentLanguage]
+            }
+        };
+    }
+
     _getInitData() {
         const { rights, view } = this.props;
 
         return { rights, view };
     }
 
-    _onModuleLoaded(api) {
-        //TODO
-        console.log('_onModuleLoaded() call', api);
+    _onModuleLoaded() {
+        console.log('_onModuleLoaded() call');
+
+        if (
+            this.remoteApi && 
+            this.remoteApi.init && 
+            typeof this.remoteApi.init === "function"
+        ) {
+            this.remoteApi.init(this._payload());
+        }
+
         //this.props.onModuleLoad(api)
     }
 
@@ -133,14 +157,17 @@ ApiProvider.propTypes = {
     token: PropTypes.string,
     addShellNotifyMessage: PropTypes.func,
     setRemoteApi: PropTypes.func,
+    ui: PropTypes.object
 
 };
 
 const mapStateToProps = (state) => {
+    const { ui } = state;
     const { api, applicationPath: path } = state.context;
     const { token, rights, application, view } = state.shell;
 
     return {
+        ui,
         api,
         path,
         token,

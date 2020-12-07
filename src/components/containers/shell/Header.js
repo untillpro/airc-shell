@@ -2,7 +2,7 @@
  * Copyright (c) 2020-present unTill Pro, Ltd.
  */
 
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
 import {
@@ -17,8 +17,7 @@ import HeaderApplicationsBar from './HeaderApplicationsBar';
 //import HeaderNotifyButton from './HeaderNotifyButton';
 import HeaderUserButton from './HeaderUserButton';
 
-class Header extends Component {
-    
+class Header extends PureComponent {
     render() {
         return (
             <div className="ushell-header">
