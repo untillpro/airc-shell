@@ -70,7 +70,7 @@ class HeaderApplicationsBar extends Component {
 
     render() {
         const { outIndexes } = this.state;
-        const { VIEWS, application } = this.props;
+        const { VIEWS, application, lang } = this.props;
 
         let views = null;
 
@@ -91,7 +91,7 @@ class HeaderApplicationsBar extends Component {
                             to={`/${application}/${item.getCode()}`} 
                             activeClassName="active"
                         >
-                            <span>{item.getName()}</span>
+                            <span>{item.getName(lang)}</span>
                         </NavLink>
                     </li>
                 );
@@ -122,14 +122,17 @@ class HeaderApplicationsBar extends Component {
 HeaderApplicationsBar.propTypes = {
     VIEWS: PropTypes.object,
     application: PropTypes.string,
+    lang: PropTypes.string,
 };
 
 const mapStateToProps = (state) => {
+    const { currentLanguage, defaultLanguage } = state.ui;
     const { application } = state.shell;
     const { VIEWS } = state.cp;
     const { remoteApi } = state.context;
 
     return {
+        lang: currentLanguage || defaultLanguage,
         VIEWS, 
         application,
         remoteApi

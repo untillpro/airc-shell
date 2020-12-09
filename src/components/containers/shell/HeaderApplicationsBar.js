@@ -74,7 +74,7 @@ class HeaderApplicationsBar extends PureComponent {
 
     render() {
         const { outIndexes } = this.state;
-        const { applications } = this.props;
+        const { applications, lang } = this.props;
         
         if (_.size(applications) > 0) {
             const list = [];
@@ -83,10 +83,12 @@ class HeaderApplicationsBar extends PureComponent {
             this.items = [];
 
             Object.values(applications).forEach((app, index) => {
+                const n = app.getName(lang);
+
                 const listitem = (
-                    <li ref={r => { if (r) this.items.push(r); }} key={app.getName()} >
+                    <li ref={r => { if (r) this.items.push(r); }} key={n} >
                         <NavLink to={`/${app.getCode()}`} activeClassName="active">
-                            {app.getName()}
+                            {n}
                         </NavLink>
                     </li>
                 );
@@ -117,12 +119,15 @@ class HeaderApplicationsBar extends PureComponent {
 HeaderApplicationsBar.propTypes = {
     selectModule: PropTypes.func.isRequired,
     applications: PropTypes.object,
+    lang: PropTypes.string,
 };
 
 const mapStateToProps = (state) => {
+    const { currentLanguage, defaultLanguage } = state.ui;
     const { APPS } = state.cp;
 
     return { 
+        lang: currentLanguage || defaultLanguage,
         applications: APPS
     };
 };
