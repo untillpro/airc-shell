@@ -6,7 +6,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Result, Button } from 'antd';
 import { withRouter } from "react-router";
-import i18next from 'i18next';
+import { translate as t } from 'airc-shell-core';
 
 class ForgotThirdStep extends Component {
     constructor() {
@@ -25,15 +25,15 @@ class ForgotThirdStep extends Component {
         return (
             <Result
                 status="success"
-                title={i18next.t('auth.forgot.success_title')}
-                subTitle={i18next.t('auth.forgot.success_text')}
+                title={t('Password changed', 'auth.forgot')}
+                subTitle={t('You can sign in with your new password', 'auth.forgot')}
                 extra={[
                     <Button
                         onClick={this.handleClick}
                         type="primary"
                         key="start"
                     >
-                        {i18next.t('auth.forgot.step_3_submit')}
+                        {t('step_3_submit', 'auth.forgot')}
                     </Button>
                 ]}
             />

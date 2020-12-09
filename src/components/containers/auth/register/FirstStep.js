@@ -6,7 +6,7 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { connect } from 'react-redux';
-import i18next from 'i18next';
+import { translate as t } from 'airc-shell-core';
 import * as Flags from 'assets/flags';
 
 import {
@@ -167,18 +167,14 @@ class FirstRegistrationStep extends Component {
 
     //compareToFirstPassword(rule, value, callback) {
     async compareToFirstPassword(rule, value, ref) {
-        //console.log("compareToFirstPassword", ref);
-
         if (value && value !== ref.getFieldValue('password')) {
-            return Promise.reject(i18next.t('auth.register.errors.not_equal_passwords'));
+            return Promise.reject(t('Two passwords that you enter is not equal', 'auth.register.errors'));
         }
 
         return Promise.resolve();
     };
 
     async validateToNextPassword(rule, value, ref) {
-        //console.log("Ref: ", ref);
-
         if (value && this.state.confirmDirty) {
             ref.validateFields(['confirm'], { force: true });
         }
@@ -189,8 +185,6 @@ class FirstRegistrationStep extends Component {
 
     //TODO before production!
     async validateEmail(rule, value) {
-
-        console.log('validateEmail', rule);
         const { api } = this.props;
 
         if (this.emailTimer) {
@@ -201,7 +195,6 @@ class FirstRegistrationStep extends Component {
             this.emailTimer = setTimeout(() => {
                 api.isAvailable({ email: value })
                     .then((res) => {
-                        console.log('api.isAvailable res: ', res);
                         const r = checkResponse(res);
 
                         if (r !== true) {
@@ -260,19 +253,17 @@ class FirstRegistrationStep extends Component {
                     }}
                 >
                     <Form.Item
-                        label={i18next.t('auth.register.email')}
+                        label={t('E-mail', 'auth.register')}
                         name="email"
                         validateFirst
-                        //hasFeedback
-                        //validateStatus="validating"
                         rules={[
                             {
                                 required: true,
-                                message: i18next.t('auth.register.errors.empty_email'),
+                                message: t('Please input your E-mail', 'auth.register.errors'),
                             },
                             {
                                 type: 'email',
-                                message: i18next.t('auth.register.errors.wrong_email'),
+                                message: t('Please input correct E-mail address', 'auth.register.errors'),
                             }
                         ]}
                     >
@@ -280,21 +271,21 @@ class FirstRegistrationStep extends Component {
                     </Form.Item>
 
                     <Form.Item
-                        label={i18next.t('auth.register.password')}
+                        label={t('Password', 'auth.register')}
                         name="password"
                         rules={[
                             {
                                 min: 6,
                                 max: 20,
-                                message: i18next.t('auth.register.errors.password_len_requirements')
+                                message: t('Password must be min {{min}} and {{max}} characters', 'auth.register.errors', { min: 6, max: 20 }),
                             },
                             {
                                 required: true,
-                                message: i18next.t('auth.register.errors.empty_password'),
+                                message: t('Please input your password', 'auth.register.errors'),
                             },
                             {
                                 pattern: PASSWORD_REGEXP,
-                                message: i18next.t('auth.register.errors.password_special_requirements'),
+                                message: t('Password format error', 'auth.register.errors'),
                             },
                             (ref) => ({
                                 validator: (rule, value) => this.validateToNextPassword(rule, value, ref),
@@ -305,12 +296,12 @@ class FirstRegistrationStep extends Component {
                     </Form.Item>
 
                     <Form.Item
-                        label={i18next.t('auth.register.confirm_password')}
+                        label={t('Confirm password', 'auth.register')}
                         name="confirm"
                         rules={[
                             {
                                 required: true,
-                                message: i18next.t('auth.register.errors.empty_confirm_password'),
+                                message: t('Please confirm your password', 'auth.register.errors'),
                             },
                             (ref) => ({
                                 validator: (rule, value) => this.compareToFirstPassword(rule, value, ref),
@@ -322,19 +313,19 @@ class FirstRegistrationStep extends Component {
                     </Form.Item>
 
                     <Form.Item
-                        label={i18next.t('auth.register.country')}
+                        label={t('Select a country', 'auth.register')}
                         name="country"
                         rules={[
                             {
                                 type: 'string',
                                 required: true,
-                                message: i18next.t('auth.register.errors.empty_country')
+                                message: t('Please select your country', 'auth.register.errors')
                             },
                         ]}
                     >
                         <Select
                             showSearch
-                            placeholder={i18next.t('auth.register.country')}
+                            placeholder={t('Select a country', 'auth.register')}
                             optionFilterProp="children"
                             filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
                         >
@@ -343,11 +334,11 @@ class FirstRegistrationStep extends Component {
                     </Form.Item>
 
 
-                    <Form.Item label={i18next.t('auth.register.phone_number')}>
+                    <Form.Item label={t('Phone number', 'auth.register')}>
                         <Input.Group compact>
                             <Form.Item
                                 name="prefix"
-                                rules={[{ required: true, message: i18next.t('auth.register.errors.empty_phone') }]}
+                                rules={[{ required: true }]}
                             >
                                 <Select
                                     style={{ width: 110 }}
@@ -366,7 +357,7 @@ class FirstRegistrationStep extends Component {
 
                             <Form.Item
                                 name={"phone"}
-                                rules={[{ required: true, message: i18next.t('auth.register.errors.empty_phone') }]}
+                                rules={[{ required: true, message: t('Please input your phone number', 'auth.register.errors') }]}
                             >
                                 <Input style={{ width: '100%' }} />
                             </Form.Item>
@@ -379,7 +370,11 @@ class FirstRegistrationStep extends Component {
                         rules={[{ required: true }]}
                     >
                         <Checkbox checked={isAgree} onChange={this.handleAgreeChange}>
-                            {i18next.t('auth.register.i_have_read')} <Button className="ant-link-button" onClick={this.onAgreementPress} type="link" >{i18next.t('auth.register.licence_agreement')}</Button>
+                            {t('I have read the', 'auth.register')} 
+
+                            <Button className="ant-link-button" onClick={this.onAgreementPress} type="link" >
+                                {t('licence agreement', 'auth.register')}
+                            </Button>
                         </Checkbox>
                     </Form.Item>
 
@@ -394,7 +389,7 @@ class FirstRegistrationStep extends Component {
                                 block
                                 loading={loading}
                             >
-                                {i18next.t('auth.register.step_1_submit')}
+                                {t('Next', 'auth.register')}
                             </Button>
                         </div>
                     </Form.Item>
@@ -402,7 +397,7 @@ class FirstRegistrationStep extends Component {
 
                 <Modal
                     width={720}
-                    title={i18next.t('auth.register.terms_of_use')}
+                    title={t('Terms of use', 'auth.register')}
                     visible={showAgreement}
                     onOk={this.agrementHandleOk}
                     onCancel={this.agrementHandleCancel}

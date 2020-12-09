@@ -36,6 +36,7 @@ import {
 } from 'const/modal_states';
 
 const INITIAL_STATE = {
+    appInit: false,
     iframeLoaded: true,
     modalStack: [],
     staticStack: [],
@@ -63,6 +64,7 @@ export default (state = INITIAL_STATE, action) => {
 
             return {
                 ...state,
+                appInit: true,
                 staticStack: stack,
                 modalStack: [],
                 loading: false

@@ -5,8 +5,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { translate as t} from 'airc-shell-core';
 import LangSelector from 'components/common/LangSelector';
-import i18next from 'i18next';
+
 import Logger from 'base/classes/Logger';
 
 class Footer extends Component {
@@ -25,13 +26,13 @@ class Footer extends Component {
             <div className="ushell-footer">
                 <div className="content-container ushell-footer-container">
                     <div className="ushell-footer-left">
-                        {i18next.t("shell.footer.copy", { year: new Date().getFullYear()})}
+                        {t("Untill. All rights reserved", "shell.footer", { year: new Date().getFullYear()})}
                     </div>
                     <div className="ushell-footer-center">
-                        {i18next.t("shell.footer.version", { version: process.env.REACT_APP_VERSION})}
+                        {t("version", "shell.footer", { version: process.env.REACT_APP_VERSION})}
                     </div>
                     <div className="ushell-footer-right">
-                        {i18next.t("shell.footer.managment")}
+                        {t("unTill Air Web Managment", "shell.footer")}
 
                         <div className="ushell-footer-lang-selector">
                             <LangSelector />

@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from "react-router";
 import { Steps } from 'antd';
-import i18next from 'i18next';
+import { translate as t } from 'airc-shell-core';
 import { motion } from "framer-motion";
 
 import * as STEPS from './forgot/';
@@ -19,15 +19,15 @@ const { Step } = Steps;
 
 const steps = [
     {
-        title: () => i18next.t("auth.forgot.step_1"),
+        title: () => t("E-mail", "auth.forgot"),
         content: STEPS.FirstStep,
     },
     {
-        title: () => i18next.t("auth.forgot.step_2"),
+        title: () => t("Set password", "auth.forgot"),
         content: STEPS.SecondStep,
     },
     {
-        title: () => i18next.t("auth.forgot.step_3"),
+        title: () => t("Done", "auth.forgot"),
         content: STEPS.ThirdStep,
     }
 ];

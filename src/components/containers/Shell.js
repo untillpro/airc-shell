@@ -48,11 +48,13 @@ class Shell extends PureComponent {
     }
     
     render() {
+        const { appInit } = this.props;
+
         return (
             <div className="ushell-container">
                 <Header />
                 <div className="ushell-working-area">
-                    <ShellRouter />
+                    { appInit ? (<ShellRouter />) : null}
                 </div>
             </div>
         );
@@ -60,10 +62,12 @@ class Shell extends PureComponent {
 }
 
 const mapStateToProps = (state) => {
+    const { appInit } = state.ui;
     const { manifest, token, application, view } = state.shell;
     const { APPS, VIEWS } = state.cp; 
 
     return {
+        appInit,
         APPS,
         VIEWS, 
         application,
@@ -75,7 +79,8 @@ const mapStateToProps = (state) => {
 
 Shell.propTypes = {
     checkAuthToken: PropTypes.func,
-    loadManifest: PropTypes.func
+    loadManifest: PropTypes.func,
+    appInit: PropTypes.bool
 };
 
 export default connect(mapStateToProps, { loadManifest, checkAuthToken })(Shell);

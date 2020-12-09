@@ -5,7 +5,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import i18next from 'i18next';
+import { translate as t } from 'airc-shell-core';
 import { Modal, Avatar } from 'antd';
 import { Link } from "react-router-dom";
 
@@ -19,8 +19,9 @@ class HeaderUserButton extends PureComponent {
         const { doLogout } = this.props;
 
         Modal.confirm({
-            title: i18next.t('shell.logout_title'),
-            content: i18next.t('shell.logout_text'),
+            cancelText: t('Cancel', 'shell.buttons'),
+            title: t('Do you realy want to quit?', 'shell'),
+            content: t('When clicked the OK button, this dialog will be closed after 1 second', 'shell'),
             onOk: () => {
                 doLogout();
                 return false;
@@ -36,7 +37,7 @@ class HeaderUserButton extends PureComponent {
             <Menu>
                 <Menu.Item>
                     <Link to="/profile">
-                        {i18next.t('shell.user_menu.general_settings')}
+                        {t('General settings', 'shell.user_menu')}
                     </Link>
                 </Menu.Item>
 
@@ -45,7 +46,7 @@ class HeaderUserButton extends PureComponent {
                     <Menu.Divider />
                     
                     <Menu.Item>
-                        {i18next.t('shell.user_menu.criteria_sets')}
+                        {t('Criteria sets', 'shell.user_menu')}
                     </Menu.Item>
                     */
                 }
@@ -56,7 +57,7 @@ class HeaderUserButton extends PureComponent {
                     onClick={() => this.quit()}
                 >
                     <LogoutOutlined />
-                    {i18next.t('shell.user_menu.sign_out')}
+                    {t('Sign out', 'shell.user_menu')}
                 </Menu.Item>
             </Menu>
         );

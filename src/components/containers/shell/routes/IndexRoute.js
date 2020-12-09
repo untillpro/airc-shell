@@ -3,23 +3,24 @@
  */
 
 import React, { PureComponent } from 'react';
+import { translate as t } from 'airc-shell-core';
 import { connect } from 'react-redux';
-
-import i18next from 'i18next';
 
 import "assets/css/index_route.css";
 
 class IndexRoute extends PureComponent {
     render() {
+        const { lang } = this.props;
+
         return (
-            <div className="index-route-container">
+            <div key={`index_${lang}`} className="index-route-container">
                 <div className="index-route-body">
                     <div className="index-route-body-title">
-                        {i18next.text("Welcome to unTill Air Shell!")}
+                        {t("Welcome to unTill Air Shell", "shell")}
                     </div>
                     <div className="index-route-body-sep"></div>
                     <div className="index-route-body-text">
-                        {i18next.text("Please select a module from top navigation bar.")}
+                        {t("Please select a module from top navigation bar", "shell")}
                     </div>
                 </div>
                 
@@ -28,4 +29,10 @@ class IndexRoute extends PureComponent {
     };
 }
 
-export default connect()(IndexRoute);
+const mapStateToProps = (state) => {
+    const { currentLanguage } = state.ui; 
+
+    return { lang: currentLanguage }
+};
+
+export default connect(mapStateToProps)(IndexRoute);
