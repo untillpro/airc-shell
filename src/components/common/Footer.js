@@ -26,7 +26,7 @@ class Footer extends Component {
             <div className="ushell-footer">
                 <div className="content-container ushell-footer-container">
                     <div className="ushell-footer-left">
-                        {t("Untill. All rights reserved", "shell.footer", { year: new Date().getFullYear()})}
+                        {t("Untill - All rights reserved", "shell.footer", { year: new Date().getFullYear()})}
                     </div>
                     <div className="ushell-footer-center">
                         {t("version", "shell.footer", { version: process.env.REACT_APP_VERSION})}

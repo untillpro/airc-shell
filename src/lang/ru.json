@@ -94,7 +94,7 @@
                 "Sign out": "Выход"
             },
             "footer": {
-                "Untill. All rights reserved": "© {{year}} Untill. Все права защищены.",
+                "Untill - All rights reserved": "© {{year}} Untill. Все права защищены.",
                 "unTill Air Web Managment": "unTill Air Web Managment",
                 "version": "v.{{version}}"
             },
