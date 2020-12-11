@@ -5,6 +5,7 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 import iframeApi from '../base/modules/iframe-api';
+//import iframeApi from 'iframe-api';
 import { connect } from 'react-redux';
 
 import {
@@ -45,18 +46,10 @@ class ApiProvider extends Component {
         this._initApi();
     }
 
-    componentDidUpdate(oldProps) {
-        const { application } = this.props;
-
-        if (application !== oldProps.application) {
-            this._initApi();
-        }
-    }
-
     _initApi() {
         const { view } = this.props;
 
-        try {
+        try { 
             iframeApi(this.API)
                 .then((api) => {
                     console.log('Received remote api in shell: ', api);
