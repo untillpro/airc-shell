@@ -1,6 +1,6 @@
 {
   "name": "airc-shell",
-  "version": "0.1.29",
+  "version": "0.1.30",
   "private": true,
   "dependencies": {
     "airc-shell-core": "file:src/base",
@@ -10,6 +10,7 @@
     "i18next": "^19.3.3",
     "iframe-api": "^0.10.0",
     "js-cookie": "^2.2.1",
+    "langcode-info": "^1.0.4",
     "qs": "^6.9.1",
     "react": "^16.12.0",
     "react-addons-css-transition-group": "^15.6.2",
@@ -36,7 +37,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "pack": "packlng -o \"./.output\" -i \"./src/\" -e \".lng\" -pr \"untill\"",
+    "unpack": "unpacklng -i \"./.output\" -o \"./src/\" -e \".lng\" -pr \"untill\" -in"
   },
   "eslintConfig": {
     "extends": "react-app"

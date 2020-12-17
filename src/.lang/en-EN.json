@@ -1,8 +1,8 @@
 {
     "name": "English",
-    "code": "0000",
+    "hex": "0000",
     "locale": "en",
-    "iso": "en-EN", 
+    "code": "en-EN",
     "translation": {
         "auth": {
             "login": {
@@ -84,7 +84,7 @@
         },
         "shell": {
             "Welcome to unTill Air Shell": "Welcome to unTill Air Shell!",
-            "Please select a module from top navigation bar":"Please select a module from top navigation bar.",
+            "Please select a module from top navigation bar": "Please select a module from top navigation bar.",
             "Do you realy want to quit?": "Do you realy want to quit?",
             "When clicked the OK button, this dialog will be closed after 1 second": "When clicked the OK button, this dialog will be closed after 1 second",
             "user_menu": {

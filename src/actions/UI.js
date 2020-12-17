@@ -51,7 +51,7 @@ export const setLanguage = (code) => {
 
         if (lang) {
             if (remoteApi && remoteApi.setLanguage && typeof remoteApi.setLanguage === 'function') {
-                remoteApi.setLanguage(lang);
+                remoteApi.setLanguage(lang.hex);
             }
 
             i18next.changeLanguage(code, () => {

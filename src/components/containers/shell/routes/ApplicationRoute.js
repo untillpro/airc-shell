@@ -59,7 +59,7 @@ class ApplicationRoute extends Component {
 
         if (oldProps.application !== application || oldProps.view !== view) {
             const newPath = this.getPath();
-            console.log('newPath', newPath, path);
+            
             if (path !== newPath) {
                 this.props.setApplicationPath(newPath);
 

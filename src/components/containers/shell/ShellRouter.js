@@ -12,10 +12,6 @@ import {
 } from './routes';
 
 class ShellRouter extends PureComponent {
-    componentDidUpdate() {
-        console.log("ShellRouter component did update");
-    }
-
     render() {
         return (
             <Switch>

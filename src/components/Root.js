@@ -38,7 +38,7 @@ import 'base/css/untill-base.css';
 import 'assets/css/main.css';
 
 //lng
-import * as lng from 'lang';
+import * as lng from '.lang';
 
 
 class Root extends PureComponent {
@@ -84,6 +84,10 @@ class Root extends PureComponent {
     }
 
     render() {
+        const { api } = this.props;
+
+        if (!api) return null;
+
         return (
             <Fragment>
                 <div className="--wrapper" key={`root`}>
@@ -101,15 +105,18 @@ class Root extends PureComponent {
 }
 
 const mapStateToProps = (state) => {
+    const { api } = state.context;
     const { modalStack, staticStack } = state.ui;
 
     return {
+        api,
         modalStack, 
         staticStack
     };
 };
 
 Root.propTypes = {
+    api: PropTypes.object,
     addShellErrorNotify: PropTypes.func,
     sendLanguageInitiated: PropTypes.func,
     initApp: PropTypes.func,

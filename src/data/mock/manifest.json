@@ -2,8 +2,8 @@
     "510000001": {
         "name": "Reports",
         "ml_name": {
-            "en": "Reports",
-            "ru": "Отчеты"
+            "enEN": "Reports",
+            "ruRU": "Отчеты"
         },
         "code": "reports",
         "methods": [
@@ -13,8 +13,8 @@
             {
                 "name": "Basic",
                 "ml_name": {
-                    "en": "Basic",
-                    "ru": "Основные"
+                    "enEN": "Basic",
+                    "ruRU": "Основные"
                 },
                 "code": "basic_reports",
                 "type": "module",
@@ -29,8 +29,8 @@
     "510000002": {
         "name": "Back Office",
         "ml_name": {
-            "en": "Back Office",
-            "ru": "Бэк-офис"
+            "enEN": "Back Office",
+            "ruRU": "Бэк-офис"
         },
         "code": "bo",
         "initialView": "products",
@@ -41,8 +41,8 @@
             {
                 "name": "Products",
                 "ml_name": {
-                    "en": "Products",
-                    "ru": "Продукты"
+                    "enEN": "Products",
+                    "ruRU": "Продукты"
                 },
                 "code": "products",
                 "type": "module",
@@ -52,8 +52,8 @@
             {
                 "name": "General",
                 "ml_name": {
-                    "en": "General",
-                    "ru": "Основные"
+                    "enEN": "General",
+                    "ruRU": "Основные"
                 },
                 "code": "general",
                 "type": "module",
@@ -63,8 +63,8 @@
             {
                 "name": "Areas",
                 "ml_name": {
-                    "en": "Areas",
-                    "ru": "Зоны"
+                    "enEN": "Areas",
+                    "ruRU": "Зоны"
                 },
                 "code": "areas",
                 "type": "module",
@@ -74,8 +74,8 @@
             {
                 "name": "Users",
                 "ml_name": {
-                    "en": "Users",
-                    "ru": "Пользователи"
+                    "enEN": "Users",
+                    "ruRU": "Пользователи"
                 },
                 "code": "users",
                 "type": "module",
@@ -90,8 +90,8 @@
     "510000003": {
         "name": "Application",
         "ml_name": {
-            "en": "Application",
-            "ru": "Приложение"
+            "enEN": "Application",
+            "ruRU": "Приложение"
         },
         "code": "app",
         "methods": [
@@ -101,8 +101,8 @@
             {
                 "name": "Order screen",
                 "ml_name": {
-                    "en": "Order screen",
-                    "ru": "Экран заказа"
+                    "enEN": "Order screen",
+                    "ruRU": "Экран заказа"
                 },
                 "code": "order_screen",
                 "type": "module",
@@ -117,8 +117,8 @@
     "510000004": {
         "name": "Journal",
         "ml_name": {
-            "en": "Journal",
-            "ru": "Журнал"
+            "enEN": "Journal",
+            "ruRU": "Журнал"
         },
         "code": "journal",
         "path": "/plugins/journal/index.html",

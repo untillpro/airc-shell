@@ -14,7 +14,6 @@ import 'assets/css/auth.css';
 
 class Auth extends Component {
     render() {
-        console.log("Auth.currentLanguage: ", currentLanguage);
         const { currentLanguage } = this.props;
 
         return (

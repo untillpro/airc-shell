@@ -4,8 +4,9 @@
 import _ from "lodash";
 import blacklist from "blacklist";
 import i18next from 'i18next';
+import lc from "langcode-info";
 
-const DEFAULT_LANG = 'en';
+const DEFAULT_LANG = 'enEN';
 
 export default (baseLangs, callback) => {
     let lng = localStorage.getItem('lang') || DEFAULT_LANG;
@@ -19,9 +20,11 @@ export default (baseLangs, callback) => {
             let o = checkLanguage(l);
 
             if (o !== false) {
-                availableLangs[o.locale] = blacklist(o, 'translation');
+                const lang = lc.langByHex(o.hex);
+                const lex = lang.lex();
+                availableLangs[lex] = blacklist(o, 'translation');
 
-                locales[o.locale] = { translation: o.translation };
+                locales[lex] = { translation: o.translation };
             }
         });
 
@@ -45,20 +48,20 @@ const checkLanguage = (lang) => {
         return false;
     }
 
-    const { name, code, locale, iso, translation } = lang;
+    const { name, code, locale, hex, translation } = lang;
 
     if (
         (!name || !_.isString(name)) ||
         (!code || !_.isString(code)) ||
         (!locale || !_.isString(locale)) ||
-        (!iso || !_.isString(iso)) ||
+        (!hex || !_.isString(hex)) ||
         (!translation || !_.isPlainObject(translation))
     ) {
         return false;
     }
 
     return {
-        name, code, locale, iso, translation
+        name, code, locale, hex, translation
     };
 };
 

@@ -42,8 +42,6 @@ class FirstStep extends Component {
         setTimeout(() => {
             api.forgot(values)
                 .then((res) => {
-                    console.log("forgot res: ", res);
-                    
                     const r = checkResponse(res);
 
                     if (r === true) {

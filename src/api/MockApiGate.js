@@ -25,6 +25,7 @@ class MockApiGate {
     }
 
     async loadManifest(token) {
+        console.log("Manifest: ", manifest);
         return manifest;
     }
 
@@ -336,8 +337,6 @@ class MockApiGate {
     }
 
     async collection(token, type, wsids, props = {}) {
-        console.log('collection method call:', token, type, wsids, entries, page, page_size, show_deleted);
-        
         const { 
             entries, 
             page, 
@@ -347,6 +346,8 @@ class MockApiGate {
             required_classifiers,
             filter_by
         } = props;
+
+        console.log('collection method call:', token, type, wsids, entries, page, page_size, show_deleted);
 
         const params = {};
         let location = null;

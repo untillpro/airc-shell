@@ -1,8 +1,8 @@
 {
     "name": "Русский",
-    "code": "0419",
+    "hex": "0419",
     "locale": "ru",
-    "iso": "ru-RU", 
+    "code": "ru-RU",
     "translation": {
         "auth": {
             "login": {
@@ -84,7 +84,7 @@
         },
         "shell": {
             "Welcome to unTill Air Shell": "Добро пожаловать в unTill Air Shell!",
-            "Please select a module from top navigation bar":"Пожалуйста, выберите модуль на верхней панели навигации.",
+            "Please select a module from top navigation bar": "Пожалуйста, выберите модуль на верхней панели навигации.",
             "Do you realy want to quit?": "Вы действительно хотите выйти?",
             "When clicked the OK button, this dialog will be closed after 1 second": "После того, как вы нажмете \"Ок\" Ваша авторизованная сессия будет прекращена. ",
             "user_menu": {

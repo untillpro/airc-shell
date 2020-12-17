@@ -33,9 +33,6 @@ class Login extends Component {
 
     onFinish(values) {
         const { api } = this.props;
-
-        console.log("Login form submit: ", values);
-
         //this.setState({ loading: true });
 
         api.auth(values)

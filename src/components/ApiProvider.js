@@ -47,12 +47,11 @@ class ApiProvider extends Component {
     }
 
     _initApi() {
-        const { view } = this.props;
-
         try { 
             iframeApi(this.API)
                 .then((api) => {
                     console.log('Received remote api in shell: ', api);
+                    
                     if (api) {
                         this.remoteApi = new URemoteAPIGate(api);
                         this.props.setRemoteApi(this.remoteApi);

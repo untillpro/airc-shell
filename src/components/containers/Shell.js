@@ -32,7 +32,6 @@ class Shell extends PureComponent {
     }
     
     componentDidMount() {
-        console.log("Shell component did mount");
         this.props.checkAuthToken(true);
         this.props.loadManifest()
 
@@ -43,10 +42,6 @@ class Shell extends PureComponent {
         }, cfg.CHECK_INTERVAL);
     }
 
-    componentDidUpdate() {
-        console.log("Shell component did update");
-    }
-    
     render() {
         const { appInit } = this.props;
 
