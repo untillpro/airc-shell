@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "airc-shell-core": "file:src/base",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "classnames": "^2.2.6",
     "color-shorthand-hex-to-six-digit": "^2.10.56",
     "formik": "^1.5.8",
