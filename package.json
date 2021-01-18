@@ -1,11 +1,11 @@
 {
   "name": "airc-shell",
-  "version": "0.1.30",
+  "version": "0.1.31",
   "private": true,
   "dependencies": {
     "airc-shell-core": "file:src/base",
-    "axios": "^0.19.2",
-    "formik": "^1.5.8",
+    "axios": ">=0.21.1",
+    "formik": "^2.2.6",
     "framer-motion": "^2.7.6",
     "i18next": "^19.3.3",
     "iframe-api": "^0.10.0",
