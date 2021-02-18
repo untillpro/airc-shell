@@ -39,6 +39,7 @@ class ApiProvider extends Component {
             collection: (type, wsids, entries, page, page_size, show_deleted) => this._invokeApiMethod('collection', type, wsids, entries, page, page_size, show_deleted), //TODO
             sync: (entries) => this._invokeApiMethod('sync', entries), //TODO
             log: (wsids, params) => this._invokeApiMethod('log', wsids, params), //TODO
+            blob: (wsids, params) => this._invokeApiMethod('log', wsids, params), //TODO
         };
     }
 
