@@ -9,6 +9,8 @@ import checkSyncEntries from './utils/CheckSyncEntries';
 import checkConfOperations from './utils/CheckConfOperations';
 import SProtBuilder from 'base/classes/SProtBuilder';
 
+const uploadFileAction = "https://badrequest.ru/tests/uploader/write.php"; //TODO: mock
+
 class ApiGate {
     constructor(host) {
         this.host = host || null;
