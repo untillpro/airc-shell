@@ -34,8 +34,10 @@ import {
 } from 'actions';
 
 //assets
-import 'base/css/untill-base.css';
-import 'assets/css/main.css';
+import 'antd/dist/antd.css';
+import '../base/css/antd_custom.scss';
+import '../base/css/untill-base.scss';
+import '../assets/css/main.css';
 
 //lng
 import * as lng from '.lang';

@@ -3,6 +3,7 @@
   "version": "0.1.34",
   "private": true,
   "dependencies": {
+    "@babel/runtime": "^7.12.13",
     "airc-shell-core": "file:src/base",
     "axios": ">=0.21.1",
     "formik": "^2.2.6",
@@ -41,9 +42,6 @@
     "pack": "packlng -o \"./.output\" -i \"./src/\" -e \".lng\" -pr \"untill\"",
     "unpack": "unpacklng -i \"./.output\" -o \"./src/\" -e \".lng\" -pr \"untill\" -in"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
   "browserslist": [
     ">0.2%",
     "not dead",
@@ -52,7 +50,6 @@
   ],
   "devDependencies": {
     "autoprefixer": "^9.7.4",
-    "eslint-plugin-react": "^7.20.6",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^6.1.0",
     "gulp-postcss": "^8.0.0",
