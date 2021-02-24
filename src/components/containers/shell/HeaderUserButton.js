@@ -14,6 +14,8 @@ import { LogoutOutlined } from '@ant-design/icons';
 
 import { doLogout } from 'actions';
 
+import AvaImg from 'assets/img/user_stub.png';
+
 class HeaderUserButton extends PureComponent {
     quit() {
         const { doLogout } = this.props;
@@ -73,7 +75,7 @@ class HeaderUserButton extends PureComponent {
                     shape="circle"
                     type="link"
                 >
-                    <Avatar src={require('assets/img/user_stub.png')} />
+                    <Avatar src={AvaImg} />
                 </Button>
             </Dropdown>
         );

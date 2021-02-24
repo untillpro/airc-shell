@@ -17,14 +17,17 @@ import HeaderApplicationsBar from './HeaderApplicationsBar';
 //import HeaderNotifyButton from './HeaderNotifyButton';
 import HeaderUserButton from './HeaderUserButton';
 
+import Logo from 'assets/img/logo.svg';
+
 class Header extends PureComponent {
+    
     render() {
         return (
             <div className="ushell-header">
                 <div className="content-container ushell-header-container">
                     <div className="ushell-header-logo">
                         <Link to="/">
-                            <img src={require('assets/img/logo.svg')} alt="logo"/>
+                            <img src={Logo} alt="logo"/>
                         </Link>
                     </div>
                     <div className="ushell-header-nav">

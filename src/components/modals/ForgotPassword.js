@@ -6,10 +6,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ReactModal from 'react-modal';
-
 import {
     hideForgotModal
 } from 'actions';
+
+import ExpiredIllustration from 'base/images/Illustrations/expired-session.svg';
 
 class ForgotPassword extends Component {
     handleClose() {
@@ -33,7 +34,7 @@ class ForgotPassword extends Component {
                 </div>
 
                 <div className="">
-                    <img src={require('base/images/Illustrations/expired-session.svg')} alt="forgot password"/>
+                    <img src={ExpiredIllustration} alt="forgot password"/>
                 </div>
 
                 <div className="">
