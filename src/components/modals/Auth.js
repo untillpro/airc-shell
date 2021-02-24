@@ -4,12 +4,11 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
 import Modal from './Modal';
-
 import { AuthForm } from 'components/forms';
-
 import { hideAuthModal } from 'actions';
+
+import ExpiredIllustration from 'base/images/Illustrations/expired-session.svg';
 
 class Auth extends Component {
     handleRequestClose() {
@@ -31,7 +30,7 @@ class Auth extends Component {
                     </div>
 
                     <div className="ushell-modal-descrpition">
-                        <img src={require('base/images/Illustrations/expired-session.svg')} alt="session has expired"/>
+                        <img src={ExpiredIllustration} alt="session has expired"/>
                     </div>
 
                     <div className="ushell-modal-text">

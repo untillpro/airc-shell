@@ -5,6 +5,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import Loader from 'assets/img/loader.gif';
+
 class LoadingStub extends Component {
     render () {
         const { loading } = this.props;
@@ -13,7 +15,7 @@ class LoadingStub extends Component {
             return (
                 <div className="ushell-loading-stub">
                     <div className="ushell-loading-stub-loader">
-                        <img src={require("assets/img/loader.gif")} alt=""/>
+                        <img src={Loader} alt=""/>
                     </div>
                 </div>
             );

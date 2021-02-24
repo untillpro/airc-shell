@@ -13,6 +13,8 @@ import { doLogout } from 'actions';
 import i18next from 'i18next';
 import { LogoutOutlined } from '@ant-design/icons';
 
+import AvaImg from 'assets/img/user_stub.png';
+
 class HeaderUserButton extends Component {
     quit() {
         const { doLogout } = this.props;
@@ -71,7 +73,7 @@ class HeaderUserButton extends Component {
                     shape="circle"
                     type="link"
                 >
-                    <Avatar src={require('assets/img/user_stub.png')} />
+                    <Avatar src={AvaImg} />
                 </Button>
             </Dropdown>
         );

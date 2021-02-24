@@ -16,6 +16,9 @@ import { userShouldConfirm, authUser } from 'actions';
 import { checkResponse } from 'utils/AuthHelpers';
 import { addShellErrorNotify } from 'actions';
 
+import Logo from 'assets/img/logo-rounded.svg';
+import Illustration from 'base/images/Illustrations/log-in.svg';
+
 class Login extends Component {
     constructor() {
         super();
@@ -110,7 +113,7 @@ class Login extends Component {
                         animate={{ scale: 1 }}
                     >
                         <div className="ushell-login-block-logo">
-                            <img src={require('assets/img/logo-rounded.svg')} alt="Logo" />
+                            <img src={Logo} alt="Logo" />
                         </div>
 
                         <div className="ushell-login-block-title">
@@ -119,7 +122,7 @@ class Login extends Component {
                         </div>
 
                         <div className="ushell-login-block-illustration">
-                            <img src={require('base/images/Illustrations/log-in.svg')} alt="Illustration" />
+                            <img src={Illustration} alt="Illustration" />
                         </div>
 
                         <Form
