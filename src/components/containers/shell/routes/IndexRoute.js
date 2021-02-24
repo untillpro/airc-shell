@@ -3,6 +3,7 @@
  */
 
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { translate as t } from 'airc-shell-core';
 import { connect } from 'react-redux';
 
@@ -28,6 +29,10 @@ class IndexRoute extends PureComponent {
         );
     };
 }
+
+IndexRoute.propTypes = {
+    lang: PropTypes.string
+};
 
 const mapStateToProps = (state) => {
     const { currentLanguage } = state.ui; 

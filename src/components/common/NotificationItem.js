@@ -2,12 +2,13 @@
  * Copyright (c) 2020-present unTill Pro, Ltd.
  */
 
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import * as Notifications from 'const/notifications.js';
 
 import cn from 'classnames';
 
-class NotificationItem extends Component {
+class NotificationItem extends PureComponent {
     constructor() {
         super();
 
@@ -214,5 +215,16 @@ class NotificationItem extends Component {
         return null;
     }
 }
+
+NotificationItem.propTypes = {
+    opened: PropTypes.bool,
+    hideClose: PropTypes.bool,
+    lifetime: PropTypes.number,
+    id: PropTypes.string,
+    type: PropTypes.string,
+    text: PropTypes.string,
+    description: PropTypes.string,
+    onRemove: PropTypes.func,
+};
 
 export default NotificationItem;
