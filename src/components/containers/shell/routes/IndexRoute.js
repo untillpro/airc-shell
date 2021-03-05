@@ -24,7 +24,6 @@ class IndexRoute extends PureComponent {
                         {t("Please select a module from top navigation bar", "shell")}
                     </div>
                 </div>
-                
             </div>
         );
     };

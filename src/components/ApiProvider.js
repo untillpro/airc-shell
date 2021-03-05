@@ -48,34 +48,35 @@ class ApiProvider extends Component {
     }
 
     _initApi() {
-        try { 
-            iframeApi(this.API)
-                .then((api) => {
-                    console.log('Received remote api in shell: ', api);
-                    
-                    if (api) {
-                        this.remoteApi = new URemoteAPIGate(api);
-                        this.props.setRemoteApi(this.remoteApi);
-                    }
-                }, function (err) {
-                    throw new Error('Shell error: Could not get iframe api', err);
-                })
-                .catch((e) => {
-                    console.error("ApiProvider.iframeApi init error: ", e);
-                });
+        const onReceived = (api) => {
+            Logger.log(api, 'Received remote api in shell: ');
+
+            if (api) {
+                this.remoteApi = new URemoteAPIGate(api);
+                this.props.setRemoteApi(this.remoteApi);
+            }
+        }
+
+        const onError = (err) => {
+            Logger.error(err, "ApiProvider.iframeApi init error: ");
+            throw new Error('Shell error: Could not get iframe api', err);
+        };
+        
+        try {
+            iframeApi(this.API, onReceived, onError, { debug: true, name: "Air Shell" });
         } catch (ex) {
-            console.error("ApiProvider.iframeApi exception catched: ", ex);
+            Logger.error(ex, "ApiProvider.iframeApi exception catched: ");
         }
     }
 
     _payload() {
         const { ui, view } = this.props;
         const { availableLangs, defaultLanguage, currentLanguage } = ui;
-        
+
         return {
             view,
-            option: {
-                defaultLanguage: availableLangs[defaultLanguage], 
+            options: {
+                defaultLanguage: availableLangs[defaultLanguage],
                 currentLanguage: availableLangs[currentLanguage]
             }
         };
@@ -88,17 +89,15 @@ class ApiProvider extends Component {
     }
 
     _onModuleLoaded() {
-        console.log('_onModuleLoaded() call');
+        Logger.log('_onModuleLoaded() call');
 
         if (
-            this.remoteApi && 
-            this.remoteApi.init && 
+            this.remoteApi &&
+            this.remoteApi.init &&
             typeof this.remoteApi.init === "function"
         ) {
             this.remoteApi.init(this._payload());
         }
-
-        //this.props.onModuleLoad(api)
     }
 
     _sendNotify(txt, dscr, tp, lt, hc) {
@@ -108,7 +107,7 @@ class ApiProvider extends Component {
     _invokeApiMethod(method, ...args) {
         const { api, token } = this.props;
 
-        console.log('_invokeApiMethod', args);
+        Logger.log(args, '_invokeApiMethod');
 
         if (method && typeof method === 'string') {
             if (this.__isApiMethodExists(api, method)) {

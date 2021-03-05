@@ -41,7 +41,7 @@ const INITIAL_STATE = {
     modalStack: [],
     staticStack: [],
     loading: true,
-    defaultLanguage: 'en',
+    defaultLanguage: 'enEN',
     currentLanguage: null,
     availableLangs: null
 };

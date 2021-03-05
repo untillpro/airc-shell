@@ -10,7 +10,7 @@ import { Spin } from 'antd';
 import {
     selectView,
     selectPlugin,
-    setApplicationPath
+    setApplicationPath    
 } from 'actions';
 
 import Logger from 'base/classes/Logger';
@@ -161,7 +161,7 @@ ApplicationRoute.propTypes = {
     manifest: PropTypes.object,
     selectView: PropTypes.func,
     selectPlugin: PropTypes.func, 
-    setApplicationPath: PropTypes.func,
+    setApplicationPath: PropTypes.func
 };
 
 const mapStateToProps = (state) => {
@@ -174,6 +174,5 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, { 
     selectView,
     selectPlugin, 
-    setApplicationPath,
-    
+    setApplicationPath
  })(ApplicationRoute);
