@@ -3,8 +3,10 @@
  */
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Formik } from 'formik';
+
 import LoginSchema from 'schemas/LoginSchema';
 
 import {
@@ -20,6 +22,7 @@ import {
     hideAuthModal,
     showForgotModal
 } from 'actions';
+
 import Logger from 'base/classes/Logger';
 
 class AuthForm extends Component {
@@ -30,10 +33,7 @@ class AuthForm extends Component {
 
     submitForm(values) {
         // TODO
-        //const { login, password } = values;
-
-        //this.props.doAuth(login, password);
-
+        
         Logger.error("This function not implemented yet", "submitForm() not implemented", "components/forms/AuthForm")
     }
 
@@ -149,11 +149,12 @@ class AuthForm extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return {};
+AuthForm.propTypes = {
+    hideAuthModal: PropTypes.func,
+    showForgotModal: PropTypes.func
 };
 
-export default connect(mapStateToProps, {
+export default connect(null, {
      hideAuthModal,
      showForgotModal
 })(AuthForm);

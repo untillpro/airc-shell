@@ -3,7 +3,8 @@
  */
 
 import _ from 'lodash';
-import React, { Component, Fragment } from 'react';
+import React, { PureComponent, Fragment } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Auth, Shell} from 'components/containers';
 import Footer from 'components/common/Footer';
@@ -29,27 +30,28 @@ import {
 import {
     initApp,
     addShellErrorNotify,
-    sendLaguageInitiated
+    sendLanguageInitiated
 } from 'actions';
 
 //assets
-import 'base/css/untill-base.css';
-import 'assets/css/main.css';
+import 'antd/dist/antd.css';
+import '../base/css/antd_custom.scss';
+import '../base/css/untill-base.scss';
+import '../assets/css/main.css';
 
 //lng
-import * as lng from 'lang';
+import * as lng from '.lang';
 
 
-class Root extends Component {
+class Root extends PureComponent {
     componentDidMount() { 
-        initi18n(lng, (err) => {
+        const availableLanguages = initi18n(lng, (err) => {
             if (err) {  
                 this.props.addShellErrorNotify(err);
-            } else {
-                this.props.sendLaguageInitiated();
             }
         });
-        
+
+        this.props.sendLanguageInitiated(availableLanguages);
         this.props.initApp(window.location.pathname); // TODO как то надо избавиться от этого. возможно через ReactRouter
     }
 
@@ -84,11 +86,13 @@ class Root extends Component {
     }
 
     render() {
-        const { currentLanguage } = this.props;
-        
+        const { api } = this.props;
+
+        if (!api) return null;
+
         return (
             <Fragment>
-                <div className="--wrapper" key={`root_${currentLanguage}`}>
+                <div className="--wrapper" key={`root`}>
                     <NotificationsContainer left top />
 
                     {this.renderStaticStateComponent()}
@@ -103,17 +107,27 @@ class Root extends Component {
 }
 
 const mapStateToProps = (state) => {
-    const { modalStack, staticStack, currentLanguage } = state.ui;
+    const { api } = state.context;
+    const { modalStack, staticStack } = state.ui;
 
     return {
+        api,
         modalStack, 
-        staticStack,
-        currentLanguage
+        staticStack
     };
+};
+
+Root.propTypes = {
+    api: PropTypes.object,
+    addShellErrorNotify: PropTypes.func,
+    sendLanguageInitiated: PropTypes.func,
+    initApp: PropTypes.func,
+    staticStack: PropTypes.array,
+    modalStack: PropTypes.array
 };
 
 export default connect(mapStateToProps, { 
     initApp, 
     addShellErrorNotify,
-    sendLaguageInitiated 
+    sendLanguageInitiated 
 })(Root);

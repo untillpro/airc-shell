@@ -3,6 +3,7 @@
  */
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ReactModal from 'react-modal';
 import {
@@ -46,8 +47,8 @@ class ForgotPassword extends Component {
     }
 } 
 
-const mapStateToProps = (state) => {
-    return {};
-};
+ForgotPassword.propTypes = {
+    hideForgotModal: PropTypes.func
+}
 
-export default connect(mapStateToProps, { hideForgotModal })(ForgotPassword);
+export default connect(null, { hideForgotModal })(ForgotPassword);

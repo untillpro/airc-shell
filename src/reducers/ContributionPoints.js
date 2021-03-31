@@ -28,9 +28,9 @@ export default (state = INITIAL_STATE, action) => {
 
             _.each(manifest, (app) => {
                 if (app.code) {
-                    const { code, name, path, initialView } = app;
+                    const { code, name, ml_name, path, initialView } = app;
 
-                    const CPApp = new Contributions.AppContribution(code, name, path, initialView);
+                    const CPApp = new Contributions.AppContribution(code, name, ml_name, path, initialView);
                     apps[app.code] = CPApp;
 
                     if (app.views && app.views.length > 0) {
@@ -46,6 +46,7 @@ export default (state = INITIAL_STATE, action) => {
                                             app: app.code,
                                             code: view.code,
                                             name: view.name,
+                                            ml_name: view.ml_name,
                                             path: view.path,
                                             data: view.data,
                                             methods: app.methods
@@ -55,7 +56,8 @@ export default (state = INITIAL_STATE, action) => {
                                         viewContribution = new Contributions.ViewContribution({
                                             app: app.code, 
                                             code: view.code, 
-                                            name: view.name, 
+                                            name: view.name,
+                                            ml_name: view.ml_name,
                                             path: view.path
                                         }); break;
                                 }

@@ -3,7 +3,7 @@
  */
 
 import _ from 'lodash';
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { NavLink } from "react-router-dom";
@@ -12,7 +12,7 @@ import {
     selectModule
 } from 'actions';
 
-class HeaderApplicationsBar extends Component {
+class HeaderApplicationsBar extends PureComponent {
     constructor() {
         super();
         
@@ -74,7 +74,7 @@ class HeaderApplicationsBar extends Component {
 
     render() {
         const { outIndexes } = this.state;
-        const { applications } = this.props;
+        const { applications, lang } = this.props;
         
         if (_.size(applications) > 0) {
             const list = [];
@@ -83,10 +83,12 @@ class HeaderApplicationsBar extends Component {
             this.items = [];
 
             Object.values(applications).forEach((app, index) => {
+                const n = app.getName(lang);
+
                 const listitem = (
-                    <li ref={r => { if (r) this.items.push(r); }} key={app.getName()} >
+                    <li ref={r => { if (r) this.items.push(r); }} key={n} >
                         <NavLink to={`/${app.getCode()}`} activeClassName="active">
-                            {app.getName()}
+                            {n}
                         </NavLink>
                     </li>
                 );
@@ -117,12 +119,15 @@ class HeaderApplicationsBar extends Component {
 HeaderApplicationsBar.propTypes = {
     selectModule: PropTypes.func.isRequired,
     applications: PropTypes.object,
+    lang: PropTypes.string,
 };
 
 const mapStateToProps = (state) => {
+    const { currentLanguage, defaultLanguage } = state.ui;
     const { APPS } = state.cp;
 
     return { 
+        lang: currentLanguage || defaultLanguage,
         applications: APPS
     };
 };

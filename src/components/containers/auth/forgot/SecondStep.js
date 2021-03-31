@@ -10,7 +10,7 @@ import {
     Input,
     Button
 } from 'antd';
-import i18next from 'i18next';
+import { translate as t } from 'airc-shell-core';
 import { checkResponse } from 'utils/AuthHelpers';
 import { resetPasswordSuccess } from 'actions';
 
@@ -77,7 +77,7 @@ class SecondStep extends Component {
 
     compareToFirstPassword(rule, value, callback) {
         if (value && value !== this.formRef.getFieldValue('password')) {
-            callback(i18next.t('auth.forgot.errors.inconsistent_passwords'));
+            callback(t('Two passwords that you enter is inconsistent', 'auth.forgot.errors'));
         } else {
             callback();
         }
@@ -118,7 +118,7 @@ class SecondStep extends Component {
                     rules={[
                         {
                             required: true,
-                            message: i18next.t('auth.forgot.errors.empty_token'),
+                            message: t('Please enter token', 'auth.forgot.errors'),
                         }
                     ]}
                 >
@@ -126,7 +126,7 @@ class SecondStep extends Component {
                 </Form.Item>
 
                 <Form.Item
-                    label={i18next.t('auth.forgot.password_label')}
+                    label={t('Password', 'auth.forgot')}
                     name="password"
                     hasFeedback
                     initialValue={INIT_VALUES['password']}
@@ -134,15 +134,15 @@ class SecondStep extends Component {
                         {
                             min: 6,
                             max: 20,
-                            message: i18next.t('auth.forgot.errors.password_len_requirements')
+                            message: t('password_len_requirements', 'auth.forgot.errors', { min: 6, max: 20 })
                         },
                         {
                             required: true,
-                            message: i18next.t('auth.forgot.errors.empty_password'),
+                            message: t('Please input your password', "auth.forgot.errors"),
                         },
                         {
                             pattern: /((?=.*d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})/,
-                            message: i18next.t('auth.forgot.errors.password_special_requirements'),
+                            message: t('Password format error', "auth.forgot.errors"),
                         },
                         {
                             validator: this.validateToNextPassword,
@@ -153,14 +153,14 @@ class SecondStep extends Component {
                 </Form.Item>
 
                 <Form.Item
-                    label={i18next.t('auth.forgot.confirm_label')}
+                    label={t('Confirm Password', "auth.forgot")}
                     name="confirm"
                     hasFeedback
                     initialValue={INIT_VALUES['confirm']}
                     rules={[
                         {
                             required: true,
-                            message: i18next.t('auth.forgot.errors.empty_confirm'),
+                            message: t('Please confirm your password', 'auth.forgot.errors'),
                         },
                         {
                             validator: this.compareToFirstPassword,
@@ -181,7 +181,7 @@ class SecondStep extends Component {
                             block
                             loading={loading}
                         >
-                            {i18next.t('auth.forgot.errors.empty_confirm')}
+                            {t('Reset password', 'auth.forgot')}
                         </Button>
                     </div>
                 </Form.Item>

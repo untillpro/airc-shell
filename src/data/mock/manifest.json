@@ -1,6 +1,14 @@
+
+
 {
     "510000001": {
         "name": "Reports",
+        "ml_name": {
+            "enEN": "Reports",
+            "nlNL": "Rapporten",
+            "ruRU": "Отчеты"
+            
+        },
         "code": "reports",
         "methods": [
             "view_change"
@@ -8,6 +16,11 @@
         "views": [
             {
                 "name": "Basic",
+                "ml_name": {
+                    "enEN": "Basic",
+                    "nlNL": "Basis",
+                    "ruRU": "Основные"
+                },
                 "code": "basic_reports",
                 "type": "module",
                 "data": {},
@@ -20,6 +33,11 @@
     },
     "510000002": {
         "name": "Back Office",
+        "ml_name": {
+            "enEN": "Back Office",
+            "nlNL": "Backoffice",
+            "ruRU": "Бэк-офис"
+        },
         "code": "bo",
         "initialView": "products",
         "methods": [
@@ -28,6 +46,11 @@
         "views": [
             {
                 "name": "Products",
+                "ml_name": {
+                    "enEN": "Products",
+                    "nlNL": "Producten",
+                    "ruRU": "Продукты"
+                },
                 "code": "products",
                 "type": "module",
                 "data": {},
@@ -35,6 +58,11 @@
             },
             {
                 "name": "General",
+                "ml_name": {
+                    "enEN": "General",
+                    "nlNL": "Algemeen",
+                    "ruRU": "Основные"
+                },
                 "code": "general",
                 "type": "module",
                 "data": {},
@@ -42,6 +70,11 @@
             },
             {
                 "name": "Areas",
+                "ml_name": {
+                    "enEN": "Areas",
+                    "nlNL": "Zone",
+                    "ruRU": "Зоны"
+                },
                 "code": "areas",
                 "type": "module",
                 "data": {},
@@ -49,6 +82,11 @@
             },
             {
                 "name": "Users",
+                "ml_name": {
+                    "enEN": "Users",
+                    "nlNL": "Gebruikers",
+                    "ruRU": "Пользователи"
+                },
                 "code": "users",
                 "type": "module",
                 "data": {},
@@ -61,6 +99,11 @@
     },
     "510000003": {
         "name": "Application",
+        "ml_name": {
+            "enEN": "Application",
+            "nlNL": "Applicatie",
+            "ruRU": "Приложение"
+        },
         "code": "app",
         "methods": [
             "view_change"
@@ -68,6 +111,11 @@
         "views": [
             {
                 "name": "Order screen",
+                "ml_name": {
+                    "enEN": "Order screen",
+                    "nlNL": "Bestelscherm",
+                    "ruRU": "Экран заказа"
+                },
                 "code": "order_screen",
                 "type": "module",
                 "data": {},
@@ -80,6 +128,11 @@
     },
     "510000004": {
         "name": "Journal",
+        "ml_name": {
+            "enEN": "Journal",
+            "nlNL": "Journaal",
+            "ruRU": "Журнал"
+        },
         "code": "journal",
         "path": "/plugins/journal/index.html",
         "order": 4,

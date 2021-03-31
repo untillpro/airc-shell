@@ -5,6 +5,7 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 import iframeApi from '../base/modules/iframe-api';
+//import iframeApi from 'iframe-api';
 import { connect } from 'react-redux';
 
 import {
@@ -38,6 +39,7 @@ class ApiProvider extends Component {
             collection: (type, wsids, entries, page, page_size, show_deleted) => this._invokeApiMethod('collection', type, wsids, entries, page, page_size, show_deleted), //TODO
             sync: (entries) => this._invokeApiMethod('sync', entries), //TODO
             log: (wsids, params) => this._invokeApiMethod('log', wsids, params), //TODO
+            blob: (wsids, params) => this._invokeApiMethod('log', wsids, params), //TODO
         };
     }
 
@@ -45,31 +47,39 @@ class ApiProvider extends Component {
         this._initApi();
     }
 
-    componentDidUpdate(oldProps) {
-        const { application } = this.props;
+    _initApi() {
+        const onReceived = (api) => {
+            Logger.log(api, 'Received remote api in shell: ');
 
-        if (application !== oldProps.application) {
-            //this._initApi();
+            if (api) {
+                this.remoteApi = new URemoteAPIGate(api);
+                this.props.setRemoteApi(this.remoteApi);
+            }
+        }
+
+        const onError = (err) => {
+            Logger.error(err, "ApiProvider.iframeApi init error: ");
+            throw new Error('Shell error: Could not get iframe api', err);
+        };
+        
+        try {
+            iframeApi(this.API, onReceived, onError, { debug: true, name: "Air Shell" });
+        } catch (ex) {
+            Logger.error(ex, "ApiProvider.iframeApi exception catched: ");
         }
     }
 
-    _initApi() {
-        try {
-            iframeApi(this.API)
-                .then((api) => {
-                    console.log('Received remote api in shell: ', api);
-                    if (api) {
-                        this.props.setRemoteApi(new URemoteAPIGate(api));
-                    }
-                }, function (err) {
-                    throw new Error('Shell error: Could not get iframe api', err);
-                })
-                .catch((e) => {
-                    console.error("ApiProvider.iframeApi init error: ", e);
-                });
-        } catch (ex) {
-            console.error("ApiProvider.iframeApi exception catched: ", ex);
-        }
+    _payload() {
+        const { ui, view } = this.props;
+        const { availableLangs, defaultLanguage, currentLanguage } = ui;
+
+        return {
+            view,
+            options: {
+                defaultLanguage: availableLangs[defaultLanguage],
+                currentLanguage: availableLangs[currentLanguage]
+            }
+        };
     }
 
     _getInitData() {
@@ -78,10 +88,16 @@ class ApiProvider extends Component {
         return { rights, view };
     }
 
-    _onModuleLoaded(api) {
-        //TODO
-        console.log('_onModuleLoaded() call', api);
-        //this.props.onModuleLoad(api)
+    _onModuleLoaded() {
+        Logger.log('_onModuleLoaded() call');
+
+        if (
+            this.remoteApi &&
+            this.remoteApi.init &&
+            typeof this.remoteApi.init === "function"
+        ) {
+            this.remoteApi.init(this._payload());
+        }
     }
 
     _sendNotify(txt, dscr, tp, lt, hc) {
@@ -91,7 +107,7 @@ class ApiProvider extends Component {
     _invokeApiMethod(method, ...args) {
         const { api, token } = this.props;
 
-        console.log('_invokeApiMethod', args);
+        Logger.log(args, '_invokeApiMethod');
 
         if (method && typeof method === 'string') {
             if (this.__isApiMethodExists(api, method)) {
@@ -133,14 +149,17 @@ ApiProvider.propTypes = {
     token: PropTypes.string,
     addShellNotifyMessage: PropTypes.func,
     setRemoteApi: PropTypes.func,
+    ui: PropTypes.object
 
 };
 
 const mapStateToProps = (state) => {
+    const { ui } = state;
     const { api, applicationPath: path } = state.context;
     const { token, rights, application, view } = state.shell;
 
     return {
+        ui,
         api,
         path,
         token,

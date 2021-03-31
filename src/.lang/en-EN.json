@@ -1,0 +1,106 @@
+{
+    "name": "English",
+    "hex": "0000",
+    "locale": "en",
+    "code": "en-EN",
+    "translation": {
+        "auth": {
+            "login": {
+                "Hello": "Hello!",
+                "Welcome back": "Welcome back",
+                "Email": "E-mail",
+                "Password": "Password",
+                "Remember me": "Remember me",
+                "Forgot password": "Forgot password",
+                "Or": "Or",
+                "register now": "register now!",
+                "Homepage": "Homepage",
+                "Knowledge base": "Knowledge base",
+                "App store": "App store",
+                "Google play": "Google play",
+                "Sign in": "Sign in",
+                "errors": {
+                    "Auth response malformed": "Auth response malformed",
+                    "Please input your e-mail": "Please input your e-mail!",
+                    "Please input your Password": "Please input your Password!"
+                }
+            },
+            "register": {
+                "Personal info": "Personal info",
+                "Confirmation": "Confirmation",
+                "Done": "Done",
+                "E-mail": "E-mail",
+                "Password": "Password",
+                "Confirm password": "Confirm password",
+                "Select a country": "Select a country",
+                "Phone number": "Phone number",
+                "I have read the": "I have read the",
+                "licence agreement": "licence agreement",
+                "We just sent an e-mail on {{email}}": "We just sent an e-mail on \"{{email}}\".",
+                "Please enter code from e-mail in the fields below": "Please enter code from e-mail in the fields below",
+                "Resend code": "Resend code",
+                "Terms of use": "Terms of use",
+                "Next": "Next",
+                "Let's start": "Let's start",
+                "Successful registration": "Successful registration!",
+                "You can start managing you account": "You can start managing you account.",
+                "errors": {
+                    "Two passwords that you enter is not equal": "Two passwords that you enter is not equal!",
+                    "Please input your E-mail": "Please input your E-mail!",
+                    "Please input correct E-mail address": "Please input correct E-mail address!",
+                    "Password must be min {{min}} and {{max}} characters": "Password must be min {{min}} and {{max}} characters",
+                    "Password format error": "Password should contain: A-Z, a-z, 0-9, special chars.",
+                    "Please input your password": "Please input your password!",
+                    "Please confirm your password": "Please confirm your password!",
+                    "Please select your country": "Please select your country!",
+                    "Please input your phone number": "Please input your phone number!",
+                    "Your token has expired": "Your token has expired. Please resend confirm code"
+                }
+            },
+            "forgot": {
+                "E-mail": "E-mail",
+                "Set password": "Set password",
+                "Done": "Done",
+                "Enter your e-mail in the field below": "Enter your e-mail in the field below and press \"Next\" button.",
+                "Enter e-mail": "Enter e-mail",
+                "Password": "Password",
+                "Confirm Password": "Confirm Password",
+                "Password changed": "Password changed!",
+                "You can sign in with your new password": "You can sign in with your new password",
+                "Next": "Next",
+                "Reset password": "Reset password",
+                "Sign in": "Sign in",
+                "errors": {
+                    "The input is not valid E-mail": "The input is not valid E-mail!",
+                    "Please input your e-mail": "Please input your e-mail!",
+                    "Two passwords that you enter is inconsistent": "Two passwords that you enter is inconsistent!",
+                    "Please enter token": "Please enter token!",
+                    "Password must be min {{min}} and max {{max}} characters": "Password must be min {{min}} and max {{max}} characters",
+                    "Password format error": "Password should contain: A-Z, a-z, 0-9, special chars.",
+                    "Please input your password": "Please input your password!",
+                    "Please confirm your password": "Please confirm your password!"
+                }
+            }
+        },
+        "shell": {
+            "Welcome to unTill Air Shell": "Welcome to unTill Air Shell!",
+            "Please select a module from top navigation bar": "Please select a module from top navigation bar.",
+            "Do you realy want to quit?": "Do you realy want to quit?",
+            "When clicked the OK button, this dialog will be closed after 1 second": "When clicked the OK button, this dialog will be closed after 1 second",
+            "user_menu": {
+                "General settings": "General settings",
+                "Criteria sets": "Criteria sets",
+                "password_change": "Password change",
+                "Sign out": "Sign out"
+            },
+            "footer": {
+                "Untill - All rights reserved": "© {{year}} Untill. All rights reserved.",
+                "unTill Air Web Managment": "unTill Air Web Managment",
+                "version": "v.{{version}}"
+            },
+            "buttons": {
+                "Cancel": "Cancel"
+            }
+        }
+    }
+}

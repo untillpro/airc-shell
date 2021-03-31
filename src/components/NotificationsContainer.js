@@ -2,15 +2,15 @@
  * Copyright (c) 2020-present unTill Pro, Ltd.
  */
 
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import cn from 'classnames';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import { NotificationItem } from 'components/common/';
 
-import cn from 'classnames';
-
-class NotificationsContainer extends Component {
+class NotificationsContainer extends PureComponent {
     constructor() {
         super();
 
@@ -95,5 +95,12 @@ const mapStateToProps = (state) => {
 
     return { notifications, last };
 }; 
+
+NotificationsContainer.propTypes = {
+    notifications: PropTypes.object,
+    last: PropTypes.string,
+    right: PropTypes.bool, 
+    bottom: PropTypes.bool
+};
 
 export default connect(mapStateToProps, )(NotificationsContainer);

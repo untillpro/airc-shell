@@ -3,6 +3,7 @@
  */
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
 
 class Modal extends Component {
@@ -32,5 +33,9 @@ class Modal extends Component {
         );
     }
 }
+
+Modal.propTypes = {
+    children: PropTypes.node
+};
 
 export default Modal;

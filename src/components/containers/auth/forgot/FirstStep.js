@@ -12,7 +12,7 @@ import {
     Button
 } from 'antd';
 import { MailOutlined } from '@ant-design/icons';
-import i18next from 'i18next';
+import { translate as t } from 'airc-shell-core';
 import { checkResponse } from 'utils/AuthHelpers';
 import { forgotChangePassword, userShouldConfirm } from 'actions/';
 
@@ -42,8 +42,6 @@ class FirstStep extends Component {
         setTimeout(() => {
             api.forgot(values)
                 .then((res) => {
-                    console.log("forgot res: ", res);
-                    
                     const r = checkResponse(res);
 
                     if (r === true) {
@@ -93,7 +91,7 @@ class FirstStep extends Component {
                 name="forgot"
             >
                 <div className='registration-text-block'>
-                    <Text>{i18next.t('auth.forgot.enter_your_email_below')}</Text>
+                    <Text>{t('Enter your e-mail in the field below', 'auth.forgot')}</Text>
                 </div>
 
                 <Form.Item
@@ -102,17 +100,17 @@ class FirstStep extends Component {
                     rules={[
                         {
                             type: 'email',
-                            message: i18next.t('auth.forgot.errors.invalid_email'),
+                            message: t('The input is not valid E-mail', 'auth.forgot.errors'),
                         },
                         {
                             required: true,
-                            message: i18next.t('auth.forgot.errors.empty_email')
+                            message: t('Please input your e-mail', 'auth.forgot.errors')
                         }
                     ]}
                 >
                     <Input
                         prefix={<MailOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
-                        placeholder={i18next.t('auth.forgot.enter_email')}
+                        placeholder={t('Enter e-mail', 'auth.forgot')}
                         size="large"
                     />
                 </Form.Item>
@@ -127,7 +125,7 @@ class FirstStep extends Component {
                             block
                             loading={loading}
                         >
-                            {i18next.t('auth.forgot.step_1_submit')}
+                            {t('Next', 'auth.forgot')}
                         </Button>
                     </div>
                 </Form.Item>

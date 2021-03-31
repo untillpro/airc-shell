@@ -4,16 +4,21 @@
 
 class ViewContribution {
     constructor( props ) {
-        const { app, code, name, path, methods } = props;
+        const { app, code, name, ml_name, path, methods } = props;
 
         this.name = name || null;
+        this.ml_name = ml_name || ml_name;
         this.path = path || null;
         this.code = code || null;
         this.app = app || null;
         this.methods = methods || [];
     }
 
-    getName() {
+    getName(lang) {
+        if (this.ml_name && typeof this.ml_name === 'object' && this.ml_name[lang]) {
+            return this.ml_name[lang];
+        }
+        
         return this.name;
     }
 

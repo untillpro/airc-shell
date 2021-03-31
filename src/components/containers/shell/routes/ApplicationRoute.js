@@ -10,7 +10,7 @@ import { Spin } from 'antd';
 import {
     selectView,
     selectPlugin,
-    setApplicationPath
+    setApplicationPath    
 } from 'actions';
 
 import Logger from 'base/classes/Logger';
@@ -59,7 +59,7 @@ class ApplicationRoute extends Component {
 
         if (oldProps.application !== application || oldProps.view !== view) {
             const newPath = this.getPath();
-            console.log('newPath', newPath, path);
+            
             if (path !== newPath) {
                 this.props.setApplicationPath(newPath);
 
@@ -81,7 +81,6 @@ class ApplicationRoute extends Component {
         this.props.selectView(code);
 
         if (remoteApi && remoteApi.selectView && typeof remoteApi.selectView === 'function') {
-            console.log('selecting view ', code);
             remoteApi.selectView(code);
         }
     }
@@ -121,13 +120,7 @@ class ApplicationRoute extends Component {
 
         Logger.debug({remoteApi, view},'Loading finished');
         
-        this.setState({
-            loaded: true
-        });
-
-        if (view && remoteApi) {
-            remoteApi.selectView(view);
-        }
+        this.setState({ loaded: true });
     }
 
     render () {
@@ -168,7 +161,7 @@ ApplicationRoute.propTypes = {
     manifest: PropTypes.object,
     selectView: PropTypes.func,
     selectPlugin: PropTypes.func, 
-    setApplicationPath: PropTypes.func,
+    setApplicationPath: PropTypes.func
 };
 
 const mapStateToProps = (state) => {
@@ -181,6 +174,5 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, { 
     selectView,
     selectPlugin, 
-    setApplicationPath,
-    
+    setApplicationPath
  })(ApplicationRoute);

@@ -6,9 +6,10 @@ import Logger from 'base/classes/Logger';
 
 class ViewModuleContribution {
     constructor( props ) {
-        const { name, data, code, path, app, methods } = props;
+        const { name, ml_name, data, code, path, app, methods } = props;
 
         this.name = name || null;
+        this.ml_name = ml_name || null;
         this.data = data || null;
         this.code = code || null;
         this.path = path || null;
@@ -16,7 +17,11 @@ class ViewModuleContribution {
         this.methods = methods || [];
     }
 
-    getName() {
+    getName(lang) {
+        if (this.ml_name && typeof this.ml_name === 'object' && this.ml_name[lang]) {
+            return this.ml_name[lang];
+        }
+        
         return this.name;
     }
 

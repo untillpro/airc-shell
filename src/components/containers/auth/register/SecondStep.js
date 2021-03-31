@@ -3,11 +3,12 @@
  */
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Typography, Spin, Button } from 'antd';
 import moment from 'moment';
 import ReactCodeInput from 'react-code-input';
-import i18next from 'i18next';
+import { translate as t } from 'airc-shell-core';
 import { registrationDone, registerConfirmCode } from 'actions';
 import { checkResponse } from 'utils/AuthHelpers';
 
@@ -84,7 +85,7 @@ class SecondStep extends Component {
         if (ttl < d && !disabled) {
             this.setState({
                 disabled: true,
-                error: i18next.t('auth.register.errors.expired_token'),
+                error: t('expired_token', 'auth.register.errors'),
                 canResend: true
             })
         }
@@ -182,7 +183,7 @@ class SecondStep extends Component {
             return (
                 <div className='registration-text-block'>
                     <Button type="link" onClick={() => this._resendCode()}>
-                        {i18next.t('auth.register.errors.resend_code')}
+                        {t('Resend code', 'auth.register')}
                     </Button>
                 </div>
             );
@@ -192,7 +193,7 @@ class SecondStep extends Component {
         return (
             <div className='registration-text-block'>
                 <Button type="link" disabled>
-                    {i18next.t('auth.register.errors.resend_code')} ({moment(d).format('mm:ss')})
+                    {t('Resend code', 'auth.register')} ({moment(d).format('mm:ss')})
                 </Button>
             </div>
         );
@@ -206,8 +207,8 @@ class SecondStep extends Component {
         const res = (
             <div>
                 <div className='registration-text-block'>
-                    <Text>{i18next.t('auth.register.confirm_text_1', { email })}</Text><br />
-                    <Text>{i18next.t('auth.register.confirm_text_2')}</Text>
+                    <Text>{t('We just sent an e-mail on {{email}}', 'auth.register', { email })}</Text><br />
+                    <Text>{t('Please enter code from e-mail in the fields below', 'auth.register')}</Text>
                 </div>
 
                 <div className='registration-code-input-block'>
@@ -247,6 +248,17 @@ const mapStateToProps = (state) => {
         ttl,
         timeBeforeResend
     };
+};
+
+SecondStep.propTypes = {
+    token: PropTypes.string,
+    timeBeforeResend: PropTypes.number,
+    ttl: PropTypes.number,
+    confirmLen: PropTypes.number,
+    api: PropTypes.object, 
+    email: PropTypes.string,
+    registerConfirmCode: PropTypes.func,
+    registrationDone: PropTypes.func,
 };
 
 export default connect(mapStateToProps, { registrationDone, registerConfirmCode })(SecondStep);

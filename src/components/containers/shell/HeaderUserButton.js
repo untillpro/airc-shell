@@ -2,26 +2,28 @@
  * Copyright (c) 2020-present unTill Pro, Ltd.
  */
 
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Button, Dropdown, Menu } from 'base/components';
+import { translate as t } from 'airc-shell-core';
 import { Modal, Avatar } from 'antd';
 import { Link } from "react-router-dom";
-//import Logger from 'base/classes/Logger';
-import { doLogout } from 'actions';
-import i18next from 'i18next';
+
+import { Button, Dropdown, Menu } from 'base/components';
 import { LogoutOutlined } from '@ant-design/icons';
+
+import { doLogout } from 'actions';
 
 import AvaImg from 'assets/img/user_stub.png';
 
-class HeaderUserButton extends Component {
+class HeaderUserButton extends PureComponent {
     quit() {
         const { doLogout } = this.props;
 
         Modal.confirm({
-            title: i18next.t('shell.logout_title'),
-            content: i18next.t('shell.logout_text'),
+            cancelText: t('Cancel', 'shell.buttons'),
+            title: t('Do you realy want to quit?', 'shell'),
+            content: t('When clicked the OK button, this dialog will be closed after 1 second', 'shell'),
             onOk: () => {
                 doLogout();
                 return false;
@@ -37,19 +39,19 @@ class HeaderUserButton extends Component {
             <Menu>
                 <Menu.Item>
                     <Link to="/profile">
-                        {i18next.t('shell.user_menu.general_settings')}
+                        {t('General settings', 'shell.user_menu')}
                     </Link>
                 </Menu.Item>
 
-                
-                
-                {/*
-                <Menu.Divider />
-                
-                <Menu.Item>
-                    {i18next.t('shell.user_menu.criteria_sets')}
-                </Menu.Item>
-                */}
+                {
+                    /*
+                    <Menu.Divider />
+                    
+                    <Menu.Item>
+                        {t('Criteria sets', 'shell.user_menu')}
+                    </Menu.Item>
+                    */
+                }
                 
                 <Menu.Divider />
 
@@ -57,7 +59,7 @@ class HeaderUserButton extends Component {
                     onClick={() => this.quit()}
                 >
                     <LogoutOutlined />
-                    {i18next.t('shell.user_menu.sign_out')}
+                    {t('Sign out', 'shell.user_menu')}
                 </Menu.Item>
             </Menu>
         );

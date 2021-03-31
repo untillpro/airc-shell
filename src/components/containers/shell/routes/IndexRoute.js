@@ -2,28 +2,41 @@
  * Copyright (c) 2020-present unTill Pro, Ltd.
  */
 
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
+import { translate as t } from 'airc-shell-core';
 import { connect } from 'react-redux';
 
 import "assets/css/index_route.css";
 
-class IndexRoute extends Component {
+class IndexRoute extends PureComponent {
     render() {
+        const { lang } = this.props;
+
         return (
-            <div className="index-route-container">
+            <div key={`index_${lang}`} className="index-route-container">
                 <div className="index-route-body">
                     <div className="index-route-body-title">
-                        Welcome to unTill Air Shell!
+                        {t("Welcome to unTill Air Shell", "shell")}
                     </div>
                     <div className="index-route-body-sep"></div>
                     <div className="index-route-body-text">
-                        Please select a module from top navigation bar.
+                        {t("Please select a module from top navigation bar", "shell")}
                     </div>
                 </div>
-                
             </div>
         );
     };
 }
 
-export default connect()(IndexRoute);
+IndexRoute.propTypes = {
+    lang: PropTypes.string
+};
+
+const mapStateToProps = (state) => {
+    const { currentLanguage } = state.ui; 
+
+    return { lang: currentLanguage }
+};
+
+export default connect(mapStateToProps)(IndexRoute);

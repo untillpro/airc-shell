@@ -18,16 +18,11 @@ const INITIAL_STATE = {
 };
 
 export default (state = INITIAL_STATE, action) => {
-    console.log('action in context reducer', action);
-
     switch (action.type) {
         case INIT_STATE:
             return initState(state, InitFuncs);
 
         case SET_REMOTE_API:
-
-            console.log('setting remote api to: ', action.payload);
-
             return {
                 ...state,
                 remoteApi: action.payload

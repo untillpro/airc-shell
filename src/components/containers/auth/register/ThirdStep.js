@@ -3,9 +3,10 @@
  */
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { withRouter } from "react-router";
 import { Result, Button } from 'antd';
-import i18next from 'i18next';
+import { translate as t } from 'airc-shell-core';
 
 class ThirdStep extends Component {
   constructor() {
@@ -24,20 +25,24 @@ class ThirdStep extends Component {
     return (
       <Result
         status="success"
-        title={i18next.t('auth.register.success_title')}
-        subTitle={i18next.t('auth.register.success_text')}
+        title={t('Successful registration', 'auth.register')}
+        subTitle={t('You can start managing you account', 'auth.register')}
         extra={[
           <Button
             type="primary"
             key="start"
             onClick={this._handlePress}
           >
-            {i18next.t('auth.register.step_3_submit')}
+            {t("Let's start", 'auth.register')}
           </Button>
         ]}
       />
     );
   }
 }
+
+ThirdStep.propTypes = {
+  history: PropTypes.object
+};
 
 export default withRouter(ThirdStep);

@@ -3,6 +3,7 @@
  */
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import Loader from 'assets/img/loader.gif';
@@ -29,6 +30,10 @@ const mapStateToProps = (state) => {
     const { loading } = state.shell;
 
     return { loading };
+};
+
+LoadingStub.propTypes = {
+    loading: PropTypes.bool
 };
 
 export default connect(mapStateToProps, null)(LoadingStub);

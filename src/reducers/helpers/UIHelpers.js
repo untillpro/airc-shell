@@ -3,13 +3,10 @@
  */
 
 import _ from 'lodash';
-import i18next from 'i18next';
 import Logger from 'base/classes/Logger';
 
-export const setShellLanguages = (state) => {
-    const langs = i18next.languages;
-
-    if (langs && _.isArray(langs)) {
+export const setShellLanguages = (state, langs = {}) => {
+    if (langs && _.isPlainObject(langs)) {
         return {
             ...state,
             availableLangs: langs
@@ -19,23 +16,20 @@ export const setShellLanguages = (state) => {
     return state;
 };
 
-export const setCurrentLanguage = (state, lang) => {
+export const setCurrentLanguage = (state, code) => {
     const { availableLangs } = state;
-    
-    if ( availableLangs && lang ) {
-        
-        if (_.indexOf(availableLangs, lang) >= 0) {
-            Logger.debug(lang, 'SELECTED LANG', 'helpers.setCurrentLanguage()')
 
-            localStorage.setItem('shellLang', lang)
-            
-            return {
-                ...state,
-                currentLanguage: lang
-            }
+    if (availableLangs && code && availableLangs[code]) {
+        Logger.debug(code, 'SELECTED LANG', 'helpers.setCurrentLanguage()')
+
+        localStorage.setItem('shellLang', code)
+
+        return {
+            ...state,
+            currentLanguage: code
         }
     } else {
-        Logger.error(availableLangs, `Can't set language to "${lang}"`, 'UIHelpers/setCurrentLanguage func');
+        Logger.error(availableLangs, `Can't set language to "${code}"`, 'UIHelpers/setCurrentLanguage func');
     }
 
     return state;

@@ -9,7 +9,7 @@ import { Form, Input, Button, Checkbox } from 'antd';
 import { Link } from 'react-router-dom';
 import { withRouter } from "react-router";
 import { withCookies } from 'react-cookie';
-import i18next from 'i18next';
+import { translate as t } from 'airc-shell-core';
 import { motion } from "framer-motion";
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { userShouldConfirm, authUser } from 'actions';
@@ -36,9 +36,6 @@ class Login extends Component {
 
     onFinish(values) {
         const { api } = this.props;
-
-        console.log("Login form submit: ", values);
-
         //this.setState({ loading: true });
 
         api.auth(values)
@@ -75,7 +72,7 @@ class Login extends Component {
         } else {
             if (notConfirmed === true) {
                 if (!token || !ttl) {
-                    this.handleError(i18next.t('auth.login.errors.auth_presponse_malformder'));
+                    this.handleError(t('Auth response malformed', 'auth.login.errors'));
                 } else {
                     history.push(`${path}register`);
                     this.props.userShouldConfirm(email, token, ttl);
@@ -94,10 +91,10 @@ class Login extends Component {
         const { visited } = this.props;
 
         if (visited === true) {
-            return i18next.t("auth.login.hello_2");
+            return t("Welcome back", "auth.login");
         }
 
-        return i18next.t("auth.login.hello_1");
+        return t("Hello", "auth.login");
     }
 
     render() {
@@ -138,13 +135,13 @@ class Login extends Component {
                                 rules={[
                                     {
                                         required: true,
-                                        message: i18next.t("auth.login.errors.empty_email")
+                                        message: t("Please input your e-mail", "auth.login.errors")
                                     }
                                 ]}
                             >
                                 <Input
                                     prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                    placeholder={i18next.t("auth.login.email")}
+                                    placeholder={t("Email", "auth.login")}
                                 />
                             </Form.Item>
 
@@ -153,22 +150,22 @@ class Login extends Component {
                                 rules={[
                                     {
                                         required: true,
-                                        message: i18next.t("auth.login.errors.empty_password")
+                                        message: t("Please input your Password", "auth.login.errors")
                                     }
                                 ]}
                             >
                                 <Input
                                     prefix={<LockOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                                     type="password"
-                                    placeholder={i18next.t("auth.login.password")}
+                                    placeholder={t("Password", "auth.login")}
                                 />
                             </Form.Item>
 
                             <Form.Item name="remember" valuePropName="checked">
-                                <Checkbox>{i18next.t("auth.login.remember_me")}</Checkbox>
+                                <Checkbox>{t("Remember me", "auth.login")}</Checkbox>
                             </Form.Item>
 
-                            <Link className="login-form-forgot" to={`${path}forgot`}>{i18next.t("auth.login.forgot_password")}</Link>
+                            <Link className="login-form-forgot" to={`${path}forgot`}>{t("Forgot password", "auth.login")}</Link>
 
                             <br />
 
@@ -178,12 +175,12 @@ class Login extends Component {
                                 className="login-form-button"
                                 loading={loading}
                             >
-                                {i18next.t("auth.login.log_in")}
+                                {t("Sign in", "auth.login")}
                             </Button>
 
                             <br />
 
-                            {i18next.t("auth.login.or")} <Link to={`${path}register`}>{i18next.t("auth.login.register_now")}</Link>
+                            {t("Or", "auth.login")} <Link to={`${path}register`}>{t("register now", "auth.login")}</Link>
                         </Form>
 
                     </motion.div>
@@ -194,10 +191,10 @@ class Login extends Component {
                         transition={{ delay: 0.5}}
                     >
                         <ul>
-                            <li><a href="http://untill.com" target="_blank" rel="noopener noreferrer">{i18next.t("auth.login.homepage")}</a></li>
-                            <li><a href="/" target="_blank" rel="noopener noreferrer">{i18next.t("auth.login.knowledge_base")}</a></li>
-                            <li><a href="/" target="_blank" rel="noopener noreferrer">{i18next.t("auth.login.app_store")}</a></li>
-                            <li><a href="/" target="_blank" rel="noopener noreferrer">{i18next.t("auth.login.google_play")}</a></li>
+                            <li><a href="http://untill.com" target="_blank" rel="noopener noreferrer">{t("Homepage", "auth.login")}</a></li>
+                            <li><a href="/" target="_blank" rel="noopener noreferrer">{t("Knowledge base", "auth.login")}</a></li>
+                            <li><a href="/" target="_blank" rel="noopener noreferrer">{t("App store", "auth.login")}</a></li>
+                            <li><a href="/" target="_blank" rel="noopener noreferrer">{t("Google play", "auth.login")}</a></li>
                         </ul>
                     </motion.div>
                 </div>

@@ -2,7 +2,7 @@
  * Copyright (c) 2020-present unTill Pro, Ltd.
  */
 
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
 import {
@@ -19,7 +19,7 @@ import HeaderUserButton from './HeaderUserButton';
 
 import Logo from 'assets/img/logo.svg';
 
-class Header extends Component {
+class Header extends PureComponent {
     
     render() {
         return (

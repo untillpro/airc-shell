@@ -1,0 +1,92 @@
+$LANGUAGE	Dutch
+$FORMNAME	/.lang:
+name	Dutch
+hex	0413
+locale	nl
+code	nl-NL
+$FORMNAME	/.lang:translation.auth.login
+Hello	Hallo
+Welcome back	Welcom terug
+Email	Email
+Password	Wachtwoord
+Remember me	Onthoud mij
+Forgot password	Wachtwoord vergeten
+Or	Of
+register now	Registreer nu!
+Homepage	Home
+Knowledge base	Kennisbank
+App store	App store
+Google play	Google playstore
+Sign in	Inloggen
+$FORMNAME	/.lang:translation.auth.login.errors
+Auth response malformed	Er ging iets fout, probeer het nogmaals.
+Please input your e-mail	Geef uw E-mail adres in!
+Please input your Password	Geef uw wachtwoord in!
+$FORMNAME	/.lang:translation.auth.register
+Personal info	Persoonlijke informatie
+Confirmation	Bevestiging
+Done	Klaar
+E-mail	E-mail
+Password	Wachtwoord
+Confirm password	Herhaal wachtwoord
+Select a country	Selecteer land
+Phone number	Telefoonnummer
+I have read the	Ik heb de llicentieovereenkomst gelezen.
+licence agreement	licentieovereenkomst
+We just sent an e-mail on {{email}}	U ontvang een email op {{email}}
+Please enter code from e-mail in the fields below	Vul uw validatiecode hieronder in
+Resend code	Validatiecode opnieuw versturen
+Terms of use	Gebruikersvoorwaarden
+Next	Volgende
+Let's start	Beginnen!
+Successful registration	Registratie is succesvol
+You can start managing you account	U kunt nu uw account aanmaken
+$FORMNAME	/.lang:translation.auth.register.errors
+Two passwords that you enter is not equal	De wachtwoorden zijn niet identiek!
+Please input your E-mail	Geef uw mailadres in!
+Please input correct E-mail address	Emailadres is niet geldig!
+Password must be min {{min}} and {{max}} characters	Het wachtwoord moet tussen de {{min}} en{{max}} karakters bevatten
+Password format error	Wachtwoord moet bestaan uit: A-Z, a-z, 0-9, speciale symbolen.
+Please input your password	Geef uw wachtwoord in!
+Please confirm your password	Bevestig uw wachtwoord!
+Please select your country	Selectuur land
+Please input your phone number	Vul uw telefoonnummer in!
+Your token has expired	Uw validatiecode is verlopen, vraag een nieuwe code aan.
+$FORMNAME	/.lang:translation.auth.forgot
+E-mail	E-mail
+Set password	Wachtwoord
+Done	Klaar
+Enter your e-mail in the field below	Geef uw e-mail adres in en klik op "Volgende".
+Enter e-mail	Uw emailadres
+Password	Wachtwoord
+Confirm Password	Bestig wachtwoord
+Password changed	Wachtwoord is aangepast!
+You can sign in with your new password	U kunt nu inloggen met het nieuwe wachtwoord.
+Next	Volgende
+Reset password	Wachtwoord restten
+Sign in	Inloggen
+$FORMNAME	/.lang:translation.auth.forgot.errors
+The input is not valid E-mail	Geen geldig emailadres!
+Please input your e-mail	Vul uw emailadress in!
+Two passwords that you enter is inconsistent	De wachtwoorden zijn niet identiek!
+Please enter token	Vul uw validatiecode in!
+Password must be min {{min}} and max {{max}} characters	Het wachtwoord moet tussen de {{min}} en{{max}} karakters bevatten
+Password format error	Wachtwoord moet bestaan uit: A-Z, a-z, 0-9, speciale symbolen.
+Please input your password	Geef uw wachtwoord in!
+Please confirm your password	Bevestig uw wachtwoord!
+$FORMNAME	/.lang:translation.shell
+Welcome to unTill Air Shell	Welcome bij unTill Air!
+Please select a module from top navigation bar	Selecteer een module in de bovenste laag van het menu.
+Do you realy want to quit?	Wilt u echt uitloggen?
+When clicked the OK button, this dialog will be closed after 1 second	Als u op OK klikt, wordt het scherm gesloten.
+$FORMNAME	/.lang:translation.shell.user_menu
+General settings	Algemene instellingen
+Criteria sets	Criteria sets
+password_change	Wachtwoord aanpassen
+Sign out	Uitloggen
+$FORMNAME	/.lang:translation.shell.footer
+Untill - All rights reserved	© {{year}} Untill. Alle rechten voorbehouden.
+unTill Air Web Managment	unTill Air Web Managment
+version	v.{{version}}
+$FORMNAME	/.lang:translation.shell.buttons
+Cancel	Terug
