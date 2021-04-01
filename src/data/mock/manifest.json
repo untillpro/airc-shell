@@ -120,6 +120,18 @@
                 "type": "module",
                 "data": {},
                 "path": "/plugins/app/index.html"
+            },
+            {
+                "name": "Order screen",
+                "ml_name": {
+                    "enEN": "Table screen",
+                    "nlNL": "Tafel scherm",
+                    "ruRU": "Экран столов"
+                },
+                "code": "table_screen",
+                "type": "module",
+                "data": {},
+                "path": "/plugins/app/index.html"
             }
         ],
         "path": "/plugins/app/index.html",
