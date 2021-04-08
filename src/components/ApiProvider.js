@@ -59,7 +59,7 @@ class ApiProvider extends Component {
 
         const onError = (err) => {
             Logger.error(err, "ApiProvider.iframeApi init error: ");
-            throw new Error('Shell error: Could not get iframe api', err);
+            //throw new Error('Shell error: Could not get iframe api', err);
         };
         
         try {
